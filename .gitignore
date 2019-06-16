@@ -6,4 +6,4 @@
 Package.resolved
 
 # Ignore UserDefault .plists generated during testing
-/Tests/UserDefaultsTests/UserDefaultTests*.plist
+/Tests/UserDefaultTests/UserDefaultTests*.plist

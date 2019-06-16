@@ -1,3 +1,3 @@
-# Burritos
+# Burritos 🌯
 
-A description of this package.
+A collection of Swift property wrappers.

@@ -2,3 +2,8 @@
 /.build
 /Packages
 /*.xcodeproj
+.swiftpm
+Package.resolved
+
+# Ignore UserDefault .plists generated during testing
+/Tests/UserDefaultsTests/UserDefaultTests*.plist

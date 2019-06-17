@@ -36,6 +36,7 @@ dependencies: [
 A reimplementation of Swift Implicitly Unwrapped Optional using a property wrapper.
 
 ```swift
+var text: String!
 @LateInit var text: String
 
 // Note: Accessing it before is is set will result in a fatal error:
@@ -51,7 +52,6 @@ A reimplementation of Swift `lazy` syntax sugar using a property wrapper.
 
 ```swift
 lazy var helloWorld = "Hello, World!"
-
 @Lazy var helloWorld = "Hello, World!"
 ```
 

@@ -37,6 +37,7 @@ A reimplementation of Swift Implicitly Unwrapped Optional using a property wrapp
 
 ```swift
 var text: String!
+// or 
 @LateInit var text: String
 
 // Note: Accessing it before is is set will result in a fatal error:
@@ -52,12 +53,13 @@ A reimplementation of Swift `lazy` syntax sugar using a property wrapper.
 
 ```swift
 lazy var helloWorld = "Hello, World!"
+// or 
 @Lazy var helloWorld = "Hello, World!"
 ```
 
 ## @UserDefault
 
-Type safe access to `UserDefaults` with support 
+Type safe access to `UserDefaults` with support  for default values.
 ```swift
 @UserDefault("test", defaultValue: "Hello, World!")
 var test: String

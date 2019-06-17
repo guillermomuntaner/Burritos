@@ -120,16 +120,16 @@ In Swift we can use a generic struct exposing a computed property whose get & se
 
 ```swift
 struct SomeWrapper<T> {
-let key: String
+    let key: String
 
-var value: T {
-get {
-// Your custom get logic
-}
-set {
-// Your custom set logic
-}
-}
+    var value: T {
+        get {
+            // Your custom get logic
+        }
+        set {
+            // Your custom set logic
+        }
+    }
 }
 ```
 
@@ -144,8 +144,8 @@ wrappedProperty.value
 
 // In order to avoid having to unwrap wrappedProperty.value all the time, you can use a computed property
 var value: String {
-get { wrappedProperty.value }
-set { wrappedProperty.value = newValue }
+    get { wrappedProperty.value }
+    set { wrappedProperty.value = newValue }
 }
 
 // So now accessing the value is much easier

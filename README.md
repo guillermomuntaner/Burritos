@@ -2,6 +2,7 @@
 
 A collection of Swift Property Wrappers.
 
+- [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@UserDefault](#UserDefault)
 
@@ -24,17 +25,31 @@ Xcode Beta 11.0 & Swift 5.1
 
 #### Package.swift
 If you already have a Package.swift or you are building your own package simply add a new dependency:
-```
+```swift
 dependencies: [
     .package(url: "https://github.com/Alamofire/Alamofire.git", from: "0.0.1")
 ]
 ```
 
+## @LateInit
+
+A reimplementation of Swift Implicitly Unwrapped Optional using a property wrapper.
+
+```swift
+@LateInit var text: String
+
+// Note: Accessing it before is is set will result in a fatal error:
+// print(text) // -> fatalError("Trying to access LateInit.value before setting it.")
+
+// Later in your code:
+text = "Hello, World!"
+```
+
 ## @Lazy
 
-A reimplementation of swift `lazy` syntax sugar using a property wrapper.
+A reimplementation of Swift `lazy` syntax sugar using a property wrapper.
 
-```
+```swift
 lazy var helloWorld = "Hello, World!"
 
 @Lazy var helloWorld = "Hello, World!"
@@ -43,20 +58,17 @@ lazy var helloWorld = "Hello, World!"
 ## @UserDefault
 
 Type safe access to `UserDefaults` with support 
-```
+```swift
 @UserDefault("test", defaultValue: "Hello, World!")
 var test: String
 ```
 
 By default it uses the standard user defauls. You can pass the instance you want to use via its constructor:
 
-```
+```swift
 @UserDefault("test", defaultValue: "Hello, World!", userDefaults: UserDefaults(suiteName: "your.app.group"))
 var test: String
 ```
-
-## @LateInit
-TODO
 
 ## @Cached
 TODO

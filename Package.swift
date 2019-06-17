@@ -9,12 +9,18 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "Burritos",
-            targets: ["Lazy", "UserDefault"]),
+            targets: ["LateInit", "Lazy", "UserDefault"]),
     ],
     dependencies: [], // No dependencies
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        // Template to add a new propert wrapped called {Wrap}:
+        // .target(name: "{Wrap}", dependencies: []),
+        // .testTarget(name: "{Wrap}Tests", dependencies: ["{Wrap}"]),
+        //
+        // Please add the target in alphabetical order.
+        // Also add "{Wrap}" to the products library targets list.
+        .target(name: "LateInit", dependencies: []),
+        .testTarget(name: "LateInitTests", dependencies: ["LateInit"]),
         .target(name: "Lazy", dependencies: []),
         .testTarget(name: "LazyTests", dependencies: ["Lazy"]),
         .target(name: "UserDefault", dependencies: []),

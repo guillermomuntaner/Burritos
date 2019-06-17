@@ -28,7 +28,7 @@ Xcode Beta 11.0 & Swift 5.1
 If you already have a Package.swift or you are building your own package simply add a new dependency:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Alamofire/Alamofire.git", from: "0.0.1")
+    .package(url: "https://github.com/guillermomuntaner/Burritos", from: "0.0.1")
 ]
 ```
 

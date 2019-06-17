@@ -2,6 +2,7 @@
 
 A collection of Swift Property Wrappers.
 
+- [@Copying](#Copying)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@UserDefault](#UserDefault)
@@ -29,6 +30,21 @@ If you already have a Package.swift or you are building your own package simply 
 dependencies: [
     .package(url: "https://github.com/Alamofire/Alamofire.git", from: "0.0.1")
 ]
+```
+
+## @Copying
+
+A property wrapper arround `NSCopying` that copies the value both on initialization and reassignment.
+If you are tired of calling  `.copy() as! X`, you will love this one.
+
+```swift
+@Copying var path: UIBezierPath = .someInitialValue
+
+public func updatePath(_ path: UIBezierPath) {
+    self.path = path
+    // You don't need to worry whoever called this method mutates the passed by reference path.
+    // Your stored self.path contains a copy.
+}
 ```
 
 ## @LateInit
@@ -65,7 +81,7 @@ Type safe access to `UserDefaults` with support  for default values.
 var test: String
 ```
 
-By default it uses the standard user defauls. You can pass the instance you want to use via its constructor:
+By default it uses the standard user defauls. You can pass any other instance of `UserDefaults` you want to use via its constructor, e.g. when you use app groups:
 
 ```swift
 @UserDefault("test", defaultValue: "Hello, World!", userDefaults: UserDefaults(suiteName: "your.app.group"))
@@ -147,6 +163,9 @@ value
 // You can also access the wrapper by using $
 $value // <- This is the SomeWrapper<String> instance
 ```  
+
+Interesting reads:
+* [Original Property Wrappers Proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md)
 
 Equivalents in other languages:
 * Kotlin has [Delegated Properties](https://kotlinlang.org/docs/reference/delegated-properties.html)

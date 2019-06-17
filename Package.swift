@@ -9,7 +9,12 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "Burritos",
-            targets: ["LateInit", "Lazy", "UserDefault"]),
+            targets: [
+                "Copying",
+                "LateInit",
+                "Lazy",
+                "UserDefault",
+            ]),
     ],
     dependencies: [], // No dependencies
     targets: [
@@ -19,6 +24,8 @@ let package = Package(
         //
         // Please add the target in alphabetical order.
         // Also add "{Wrap}" to the products library targets list.
+        .target(name: "Copying", dependencies: []),
+        .testTarget(name: "CopyingTests", dependencies: ["Copying"]),
         .target(name: "LateInit", dependencies: []),
         .testTarget(name: "LateInitTests", dependencies: ["LateInit"]),
         .target(name: "Lazy", dependencies: []),

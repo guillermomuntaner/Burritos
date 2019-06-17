@@ -2,8 +2,8 @@
 
 A collection of Swift Property Wrappers.
 
-- [@Lazy](#@Lazy)
-- [@UserDefault](#@UserDefault)
+- [@Lazy](#Lazy)
+- [@UserDefault](#UserDefault)
 
 ## 🚧 Beta Software:  🚧 
 

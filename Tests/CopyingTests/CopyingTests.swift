@@ -8,54 +8,40 @@
 import XCTest
 @testable import Copying
 
-fileprivate class EmptyClass: NSCopying {
-    func copy(with zone: NSZone? = nil) -> Any { return EmptyClass() }
-}
-
-fileprivate let initialInstance = EmptyClass()
-
 final class CopyingTests: XCTestCase {
     
-    // MARK: testCopyOnDefaultInit
+    class SomeClass: NSCopying {
+        func copy(with zone: NSZone? = nil) -> Any { return SomeClass() }
+    }
     
-    @Copying private var copying1: EmptyClass = initialInstance
+    let initialInstance = SomeClass()
+    
+    @Copying var instance: SomeClass = .init() // Dummy value
+    
+    override func setUp() {
+        $instance = Copying(initialValue: initialInstance)
+    }
     
     func testCopyOnDefaultInit() {
-        XCTAssert(copying1 !== initialInstance)
+        XCTAssert(instance !== initialInstance)
     }
-    
-    
-    // MARK: testInitWithoutCopying
-    
-    @Copying(withoutCopying: initialInstance)
-    private var copying2: EmptyClass
     
     func testInitWithoutCopying() {
-        XCTAssert(copying2 === initialInstance)
+        $instance = Copying(withoutCopying: initialInstance)
+        XCTAssert(instance === initialInstance)
     }
-    
-    
-    // MARK: testCopyOnReassign
-    
-    @Copying private var copying3: EmptyClass = EmptyClass()
     
     func testCopyOnReassign() {
-        let newInstance = EmptyClass()
-        copying3 = newInstance
-        XCTAssert(copying3 !== newInstance)
+        let newInstance = SomeClass()
+        instance = newInstance
+        XCTAssert(instance !== newInstance)
     }
-    
-    
-    // MARK: testGetWithoutCopying
-    
-    @Copying private var copying4: EmptyClass = EmptyClass()
     
     func testGetWithoutCopying() {
-        let newInstance = EmptyClass()
-        $copying4.storage = newInstance
-        XCTAssert(copying4 === newInstance)
+        let newInstance = SomeClass()
+        $instance.storage = newInstance
+        XCTAssert(instance === newInstance)
     }
-    
     
     // MARK: - allTests
     

@@ -15,14 +15,14 @@
 /// Sounds familiar? LateInit is an reimplementation of a Swift "Implicitly Unwrapped Optional".
 /// 
 /// Usage:
+/// ```
+/// @LateInit var text: String
 ///
-///     @LateInit var text: String
+/// // Note: Access before initialization triggers a fatal error:
+/// // print(text) // -> fatalError("Trying to access LateInit.value before setting it.")
 ///
-///     // Note: Accessing it before is is set will result in a fatal error:
-///     // print(text) // -> fatalError("Trying to access LateInit.value before setting it.")
-///
-///     // Later in your code:
-///     text = "Hello, World!"
+/// // Initialize later in your code:
+/// text = "Hello, World!"
 ///
 @propertyDelegate
 public struct LateInit<Value> {

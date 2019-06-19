@@ -2,10 +2,12 @@
 
 A collection of Swift Property Wrappers.
 
+- [@AtomicWrite](#AtomicWrite)
 - [@Copying](#Copying)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@UserDefault](#UserDefault)
+- More coming ...
 
 ## 🚧 Beta Software:  🚧 
 
@@ -32,10 +34,32 @@ dependencies: [
 ]
 ```
 
+
+## @AtomicWrite
+
+A property wrapper granting atomic write access to the wrapped property.
+Reading access is not atomic but is exclusive with write & mutate operations.
+Atomic mutation (read-modify-write) can be done using the wrapper `mutate` method.
+
+```swift
+@Atomic var count = 0
+
+// You can atomically write (non-derived) values directly:
+count = 99
+
+// To mutate (read-modify-write) always use the wrapper method:
+DispatchQueue.concurrentPerform(iterations: 1000) { index in
+    $count.mutate { $0 += 1 }
+}
+
+print(count) // 1099
+```
+
+
 ## @Copying
 
 A property wrapper arround `NSCopying` that copies the value both on initialization and reassignment.
-If you are tired of calling  `.copy() as! X`, you will love this one.
+If you are tired of calling  `.copy() as! X` you will love this one.
 
 ```swift
 @Copying var path: UIBezierPath = .someInitialValue
@@ -84,26 +108,21 @@ var test: String
 By default it uses the standard user defauls. You can pass any other instance of `UserDefaults` you want to use via its constructor, e.g. when you use app groups:
 
 ```swift
-@UserDefault("test", defaultValue: "Hello, World!", userDefaults: UserDefaults(suiteName: "your.app.group"))
+let userDefaults = UserDefaults(suiteName: "your.app.group")
+@UserDefault("test", defaultValue: "Hello, World!", userDefaults: userDefaults)
 var test: String
 ```
 
 ## @Cached
 TODO
 
-## @Dependency //  Locator pattern
+## @Dependency (Service locator pattern)
 TODO
 
 ## Thread safety
 TODO
 
 ## Command line parameters
-TODO
-
-## Locator pattern
-TODO
-
-## Singleton?
 TODO
 
 ## Weak
@@ -120,14 +139,15 @@ In Swift we can use a generic struct exposing a computed property whose get & se
 
 ```swift
 struct SomeWrapper<T> {
-    let key: String
-
+    ...
     var value: T {
         get {
             // Your custom get logic
+            ...
         }
         set {
             // Your custom set logic
+            ...
         }
     }
 }
@@ -166,6 +186,9 @@ $value // <- This is the SomeWrapper<String> instance
 
 Interesting reads:
 * [Original Property Wrappers Proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md)
+* [SwiftLee: Property wrappers to remove boilerplate code in Swift](https://www.avanderlee.com/swift/property-wrappers/)
+* [Majid's: Understanding Property Wrappers in SwiftUI](https://mecid.github.io/2019/06/12/understanding-property-wrappers-in-swiftui/)
+* [Swift by Sundell: The Swift 5.1 features that power SwiftUI’s API](https://www.swiftbysundell.com/posts/the-swift-51-features-that-power-swiftuis-api)
 
 Equivalents in other languages:
 * Kotlin has [Delegated Properties](https://kotlinlang.org/docs/reference/delegated-properties.html)

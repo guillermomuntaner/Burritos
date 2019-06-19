@@ -10,6 +10,7 @@ let package = Package(
         .library(
             name: "Burritos",
             targets: [
+                "AtomicWrite",
                 "Copying",
                 "LateInit",
                 "Lazy",
@@ -24,6 +25,8 @@ let package = Package(
         //
         // Please add the target in alphabetical order.
         // Also add "{Wrap}" to the products library targets list.
+        .target(name: "AtomicWrite", dependencies: []),
+        .testTarget(name: "AtomicWriteTests", dependencies: ["AtomicWrite"]),
         .target(name: "Copying", dependencies: []),
         .testTarget(name: "CopyingTests", dependencies: ["Copying"]),
         .target(name: "LateInit", dependencies: []),

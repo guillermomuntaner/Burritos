@@ -1,9 +1,10 @@
 # 🌯🌯 Burritos 
 
-A collection of Swift Property Wrappers.
+A collection of well tested Swift Property Wrappers.
 
 - [@AtomicWrite](#AtomicWrite)
 - [@Copying](#Copying)
+- [@DynamicUIColor](#DynamicUIColor)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@UserDefault](#UserDefault)
@@ -11,7 +12,7 @@ A collection of Swift Property Wrappers.
 
 ## 🚧 Beta Software:  🚧 
 
-Property Wrappers were announced by Apple during WWDC 2019. They are a fundamental component in SwiftUI syntax sugar hence Apple pushed them into the Swift 5.1 beta, skipping the normal Swift Evolution process. Final proposals are being discussed right now in the forucs so they are subject to change.
+Property Wrappers were announced by Apple during WWDC 2019. They are a fundamental component in SwiftUI syntax sugar hence Apple pushed them into the Swift 5.1 beta, skipping the normal Swift Evolution process. Final proposals are being discussed right now in the forums so keep in ming the API can change.
 
 ## Requirements
 Xcode Beta 11.0 & Swift 5.1
@@ -71,6 +72,41 @@ public func updatePath(_ path: UIBezierPath) {
 }
 ```
 
+## @DynamicUIColor
+
+A property wrapper arround UIColor to easily support dark mode.
+
+```swift 
+@DynamicUIColor(light: .white, dark: .black)
+var backgroundColor: UIColor
+
+view.backgroundColor = backgroundColor // .white for light mode, .black for dark mode.
+```
+
+To propery support dark mode you should set your colors on load and any time the `userInterfaceStyle` changes. You can use the `UIViewController.traitCollectionDidChange` method to detect changes:
+
+```
+override func viewDidLoad() {
+    super.viewDidLoad()
+    bindColors() // Set initial value
+}
+
+override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    if previousTraitCollection.userInterfaceStyle != UITraitCollection.current.userInterfaceStyle {
+        bindColors() // userInterfaceStyle has changed; reset colors
+    }
+}
+
+func bindColors() {
+    view.backgroundColor = backgroundColor
+    ...
+}
+```
+
+Original idea courtesy of [@bardonadam](https://twitter.com/bardonadam)
+
+
 ## @LateInit
 
 A reimplementation of Swift Implicitly Unwrapped Optional using a property wrapper.
@@ -80,7 +116,7 @@ var text: String!
 // or 
 @LateInit var text: String
 
-// Note: Accessing it before is is set will result in a fatal error:
+// Note: Accessing it before initializing will result in a fatal error:
 // print(text) // -> fatalError("Trying to access LateInit.value before setting it.")
 
 // Later in your code:
@@ -184,11 +220,13 @@ value
 $value // <- This is the SomeWrapper<String> instance
 ```  
 
+
 Interesting reads:
 * [Original Property Wrappers Proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md)
 * [SwiftLee: Property wrappers to remove boilerplate code in Swift](https://www.avanderlee.com/swift/property-wrappers/)
 * [Majid's: Understanding Property Wrappers in SwiftUI](https://mecid.github.io/2019/06/12/understanding-property-wrappers-in-swiftui/)
 * [Swift by Sundell: The Swift 5.1 features that power SwiftUI’s API](https://www.swiftbysundell.com/posts/the-swift-51-features-that-power-swiftuis-api)
+
 
 Equivalents in other languages:
 * Kotlin has [Delegated Properties](https://kotlinlang.org/docs/reference/delegated-properties.html)

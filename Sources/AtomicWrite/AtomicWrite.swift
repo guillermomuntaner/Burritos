@@ -12,7 +12,7 @@ import Foundation
 /// Reading access is not atomic but is exclusive with write & mutate operations.
 ///
 /// - Note: Getting and then setting is not an atomic operation. It is easy to unknowingly
-/// trigger a ger & a set, e.g.  when increasing a counter `count += 1`. Sadly such an atomic
+/// trigger a get & a set, e.g.  when increasing a counter `count += 1`. Sadly such an atomic
 /// modification cannot be simply done with getters and setter, hence we expose  the
 /// `mutate(_ action: (inout Value) -> Void)`  method on the wrapper for this
 /// purpose which you can access with a $ prefix.

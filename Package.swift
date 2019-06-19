@@ -12,6 +12,7 @@ let package = Package(
             targets: [
                 "AtomicWrite",
                 "Copying",
+                "DynamicUIColor",
                 "LateInit",
                 "Lazy",
                 "UserDefault",
@@ -29,6 +30,8 @@ let package = Package(
         .testTarget(name: "AtomicWriteTests", dependencies: ["AtomicWrite"]),
         .target(name: "Copying", dependencies: []),
         .testTarget(name: "CopyingTests", dependencies: ["Copying"]),
+        .target(name: "DynamicUIColor", dependencies: []),
+        .testTarget(name: "DynamicUIColorTests", dependencies: ["DynamicUIColor"]),
         .target(name: "LateInit", dependencies: []),
         .testTarget(name: "LateInitTests", dependencies: ["LateInit"]),
         .target(name: "Lazy", dependencies: []),

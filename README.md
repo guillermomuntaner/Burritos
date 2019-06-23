@@ -87,7 +87,7 @@ view.backgroundColor = backgroundColor // .white for light mode, .black for dark
 
 To propery support dark mode you should set your colors on load and any time the `userInterfaceStyle` changes. You can use the `UIViewController.traitCollectionDidChange` method to detect changes:
 
-```
+```swift
 override func viewDidLoad() {
     super.viewDidLoad()
     bindColors() // Set initial value
@@ -113,7 +113,7 @@ Original idea courtesy of [@bardonadam](https://twitter.com/bardonadam)
 
 A property wrapper arround a value that can expire. Getting the value after given duration or expiration date will return nil.
 
-```
+```swift
 @Expirable(duration: 60)
 var apiToken: String?
 
@@ -165,7 +165,7 @@ lazy var helloWorld = "Hello, World!"
 
 A property wrapper that automatically stores history and supports undo and redo operations.
 
-```
+```swift
 @UndoRedo var text = ""
 
 text = "Hello"
@@ -242,7 +242,7 @@ struct SomeWrapper<T> {
 
 In plain old Swift you would have used this as follows:
 
-```
+```swift
 // Instantiate your property wrapper
 var wrappedProperty = SomeWrapper<String>("Hello, World!")
 
@@ -261,7 +261,7 @@ value
 
 Swift 5.1 leverages annotations and the compiler to generate this code for you. It also bridges the assignment operator to the wrapper constructor which leads to a really nice syntax. So now, we can simply use:
 
-```
+```swift
 @SomeWrapper var value = "Hello, World!"
 
 // Access the wrapped value:

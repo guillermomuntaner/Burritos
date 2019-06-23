@@ -8,6 +8,7 @@ import EnvironmentVariableTests
 import ExpirableTests
 import LateInitTests
 import LazyTests
+import StackTests
 import UndoRedoTests
 import UserDefaultTests
 
@@ -23,6 +24,7 @@ tests += LateInitTests.allTests()
 tests += LazyTests.allTests()
 tests += LazyConstantTests.allTests()
 tests += UndoRedoTests.allTests()
+tests += StackTests.allTests()
 tests += UserDefaultTests.allTests()
 
 XCTMain(tests)

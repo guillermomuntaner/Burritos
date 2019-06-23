@@ -17,6 +17,7 @@ A collection of well tested Swift Property Wrappers.
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@LazyConstant](#LazyConstant)
+- [@Stack](#Stack)
 - [@UndoRedo](#UndoRedo)
 - [@UserDefault](#UserDefault)
 - More coming ...
@@ -247,6 +248,24 @@ result = newResult // Compiler error
 ```
 
 **Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `$value = LazyConstant(initialValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
+
+## @Stack
+
+Implementation of a classic [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
+The property wrapper maps `get` to `pop` and `set` to `push` hence it behaves like a pointer to the top of the stack.
+
+- Important: Accessing the wrapped property means the most recently added element is removed from the stack.
+If what you want to do is check the value without removing it then use the property wrapper `peek()` method.
+
+```
+@Stack val topOfTasksStack: Task
+
+topOfTasksStack = Task(1)
+
+while let task = self.topOfTasksStack {
+    process(task)
+}
+```
 
 
 ## @UndoRedo

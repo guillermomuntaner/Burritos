@@ -15,6 +15,7 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(LateInitTests.allTests),
         testCase(LazyTests.allTests),
         testCase(LazyConstantTests.allTests),
+        testCase(StackTests.allTests),
         testCase(UndoRedoTests.allTests),
         testCase(UserDefaultTests.allTests),
     ]

@@ -5,6 +5,7 @@ A collection of well tested Swift Property Wrappers.
 - [@AtomicWrite](#AtomicWrite)
 - [@Copying](#Copying)
 - [@DynamicUIColor](#DynamicUIColor)
+- [@Expirable](#Expirable)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@UndoRedo](#UndoRedo)
@@ -106,6 +107,30 @@ func bindColors() {
 ```
 
 Original idea courtesy of [@bardonadam](https://twitter.com/bardonadam)
+
+
+## @Expirable
+
+A property wrapper arround a value that can expire. Getting the value after given duration or expiration date will return nil.
+
+```
+@Expirable(duration: 60)
+var apiToken: String?
+
+// New values will be valid for 60s
+apiToken = "123456abcd"
+print(apiToken) // "123456abcd"
+sleep(61)
+print(apiToken) // nil
+
+// You can also construct an expirable with an initial value and expiration date:
+@Expirable(initialValue: "zyx987", expirationDate: date, duration: 60)
+var apiToken: String?
+// or just update an existing one:
+$apiToken.set("zyx987", expirationDate: date)
+```
+
+[Courtesy of @v_pradeilles](https://twitter.com/v_pradeilles)
 
 
 ## @LateInit

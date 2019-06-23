@@ -15,6 +15,7 @@ let package = Package(
                 "DynamicUIColor",
                 "LateInit",
                 "Lazy",
+                "UndoRedo",
                 "UserDefault",
             ]),
     ],
@@ -36,6 +37,8 @@ let package = Package(
         .testTarget(name: "LateInitTests", dependencies: ["LateInit"]),
         .target(name: "Lazy", dependencies: []),
         .testTarget(name: "LazyTests", dependencies: ["Lazy"]),
+        .target(name: "UndoRedo", dependencies: []),
+        .testTarget(name: "UndoRedoTests", dependencies: ["UndoRedo"]),
         .target(name: "UserDefault", dependencies: []),
         .testTarget(name: "UserDefaultTests", dependencies: ["UserDefault"]),
     ]

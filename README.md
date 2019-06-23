@@ -7,6 +7,7 @@ A collection of well tested Swift Property Wrappers.
 - [@DynamicUIColor](#DynamicUIColor)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
+- [@UndoRedo](#UndoRedo)
 - [@UserDefault](#UserDefault)
 - More coming ...
 
@@ -123,6 +124,7 @@ var text: String!
 text = "Hello, World!"
 ```
 
+
 ## @Lazy
 
 A reimplementation of Swift `lazy` syntax sugar using a property wrapper.
@@ -132,6 +134,30 @@ lazy var helloWorld = "Hello, World!"
 // or 
 @Lazy var helloWorld = "Hello, World!"
 ```
+
+
+## @UndoRedo
+
+A property wrapper that automatically stores history and supports undo and redo operations.
+
+```
+@UndoRedo var text = ""
+
+text = "Hello"
+text = "Hello, World!"
+
+$text.canUndo // true
+$text.undo() // text == "Hello"
+
+$text.canRedo // true
+$text.redo() // text == "Hello, World!"
+```
+
+You can check at any time if there is an undo or a redo stack using `canUndo` & `canRedo`
+properties, which might be particularly usefull to enable/disable user interface buttons.
+
+Original idea by  [@JeffHurray](https://twitter.com/JeffHurray/status/1137816198689673216)
+
 
 ## @UserDefault
 

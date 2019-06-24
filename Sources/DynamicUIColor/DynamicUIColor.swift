@@ -54,14 +54,19 @@ public enum UserInterfaceStyle {
     /// In iOS >=13 it returns `UITraitCollection.current.userInterfaceStyle` mapped to UserInterfaceStyle.
     /// In prior versions it returns .light.
     public static var current: UserInterfaceStyle  {
-        if #available(iOS 13.0, *) {
+        #if os(iOS) || os(tvOS)
+        if #available(iOS 13.0, tvOS 13.0, *) {
             return .init(style: UITraitCollection.current.userInterfaceStyle)
         } else {
             return .light
         }
+        #else
+        return .light
+        #endif
     }
     
-    @available(iOS 12.0, *)
+    #if os(iOS) || os(tvOS)
+    @available(iOS 12.0, tvOS 10.0, *)
     init(style: UIUserInterfaceStyle) {
         switch style {
         case .light, .unspecified: self = .light
@@ -69,6 +74,7 @@ public enum UserInterfaceStyle {
         @unknown default: self = .light
         }
     }
+    #endif
 }
 
 #endif

@@ -70,7 +70,9 @@ extension UInt32: PropertyListValue {}
 extension UInt64: PropertyListValue {}
 extension Double: PropertyListValue {}
 extension Float: PropertyListValue {}
+#if os(macOS)
 extension Float80: PropertyListValue {}
+#endif
 
 extension Array: PropertyListValue where Element: PropertyListValue {}
 

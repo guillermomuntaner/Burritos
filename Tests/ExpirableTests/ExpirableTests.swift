@@ -10,7 +10,7 @@ import XCTest
 
 final class ExpirableTests: XCTestCase {
     
-    @Expirable(duration: 0.1)
+    @Expirable(duration: 1)
     var token: String?
     
     override func setUp() {
@@ -24,7 +24,7 @@ final class ExpirableTests: XCTestCase {
     
     func testGetExpired() {
         token = "1234"
-        usleep(150_000) // 0.15 secs
+        sleep(2)
         XCTAssertFalse($token.isValid)
     }
     
@@ -39,32 +39,32 @@ final class ExpirableTests: XCTestCase {
     
     func testIsValidExpired() {
         token = "1234"
-        usleep(150_000) // 0.15 secs
+        sleep(2)
         XCTAssertNil(token)
     }
     
     func testInitWithExistingValidToken() {
-        let pastDate = Date().addingTimeInterval(0.2)
-        $token = Expirable<String>(initialValue: "abc", expirationDate: pastDate, duration: 0.2)
+        let pastDate = Date().addingTimeInterval(2)
+        $token = Expirable<String>(initialValue: "abc", expirationDate: pastDate, duration: 2)
         XCTAssertEqual(token, "abc")
-        usleep(100_000) // 0.15 secs, bigger than default 0.1 but smaller than custom 0.2.
+        sleep(1)
         XCTAssertEqual(token, "abc")
-        usleep(300_000)
+        sleep(3)
         XCTAssertNil(token)
     }
     
     func testInitWithExistingExpiredToken() {
-        let pastDate = Date().addingTimeInterval(-0.2)
-        $token = Expirable<String>(initialValue: "abc", expirationDate: pastDate, duration: 0.1)
+        let pastDate = Date().addingTimeInterval(-2)
+        $token = Expirable<String>(initialValue: "abc", expirationDate: pastDate, duration: 2)
         XCTAssertNil(token)
     }
     
     func testSetWithCustomDate() {
-        $token.set("abc", expirationDate: Date().addingTimeInterval(0.2))
+        $token.set("abc", expirationDate: Date().addingTimeInterval(2))
         XCTAssertEqual(token, "abc")
-        usleep(100_000) // 0.15 secs, bigger than default 0.1 but smaller than custom 0.2.
+        sleep(1)
         XCTAssertEqual(token, "abc")
-        usleep(300_000)
+        sleep(3)
         XCTAssertNil(token)
     }
     

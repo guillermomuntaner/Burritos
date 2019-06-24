@@ -1,5 +1,8 @@
 # 🌯🌯 Burritos 
 
+[![Build Status](https://app.bitrise.io/app/82996dff101ee00e/status.svg?token=C1i6-qS1Bfhz1QvbJPV7GA&branch=master)](https://app.bitrise.io/app/82996dff101ee00e)
+[![Swift Package Manager](https://img.shields.io/badge/swift%20package%20manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+
 A collection of well tested Swift Property Wrappers.
 
 - [@AtomicWrite](#AtomicWrite)

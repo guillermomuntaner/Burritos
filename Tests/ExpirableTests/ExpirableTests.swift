@@ -18,10 +18,12 @@ final class ExpirableTests: XCTestCase {
     }
     
     func testGet() {
+        token = "1234"
         XCTAssertEqual(token, "1234")
     }
     
     func testGetExpired() {
+        token = "1234"
         usleep(150_000) // 0.15 secs
         XCTAssertFalse($token.isValid)
     }
@@ -36,6 +38,7 @@ final class ExpirableTests: XCTestCase {
     }
     
     func testIsValidExpired() {
+        token = "1234"
         usleep(150_000) // 0.15 secs
         XCTAssertNil(token)
     }
@@ -44,9 +47,9 @@ final class ExpirableTests: XCTestCase {
         let pastDate = Date().addingTimeInterval(0.2)
         $token = Expirable<String>(initialValue: "abc", expirationDate: pastDate, duration: 0.2)
         XCTAssertEqual(token, "abc")
-        usleep(150_000) // 0.15 secs, bigger than default 0.1 but smaller than custom 0.2.
+        usleep(100_000) // 0.15 secs, bigger than default 0.1 but smaller than custom 0.2.
         XCTAssertEqual(token, "abc")
-        usleep(250_000)
+        usleep(300_000)
         XCTAssertNil(token)
     }
     
@@ -59,9 +62,9 @@ final class ExpirableTests: XCTestCase {
     func testSetWithCustomDate() {
         $token.set("abc", expirationDate: Date().addingTimeInterval(0.2))
         XCTAssertEqual(token, "abc")
-        usleep(150_000) // 0.15 secs, bigger than default 0.1 but smaller than custom 0.2.
+        usleep(100_000) // 0.15 secs, bigger than default 0.1 but smaller than custom 0.2.
         XCTAssertEqual(token, "abc")
-        usleep(250_000)
+        usleep(300_000)
         XCTAssertNil(token)
     }
     

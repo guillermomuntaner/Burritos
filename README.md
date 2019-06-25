@@ -41,6 +41,19 @@ dependencies: [
 ```
 
 
+### Cocoapods
+Add Burritos to your Podfile:
+```rb
+# You can add all the property wrappers
+pod 'Burritos', '~> 0.0.2'
+
+# Or you can add just the ones you want
+pod 'Burritos/Copying', '~> 0.0.2'
+pod 'Burritos/UndoRedo', '~> 0.0.2'
+pod 'Burritos/UserDefault', '~> 0.0.2'
+```
+
+
 ## @AtomicWrite
 
 A property wrapper granting atomic write access to the wrapped property.

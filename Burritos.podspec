@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Burritos'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'A collection of well tested Swift Property Wrappers.'
   s.description      = <<-DESC
 A collection of well tested Swift Property Wrappers.

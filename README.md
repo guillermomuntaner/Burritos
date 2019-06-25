@@ -1,7 +1,9 @@
 # 🌯🌯 Burritos 
 
-[![Build Status](https://app.bitrise.io/app/82996dff101ee00e/status.svg?token=C1i6-qS1Bfhz1QvbJPV7GA&branch=master)](https://app.bitrise.io/app/82996dff101ee00e)
+[![Bitrise Build Status](https://img.shields.io/bitrise/82996dff101ee00e.svg?token=C1i6-qS1Bfhz1QvbJPV7GA)](https://app.bitrise.io/app/82996dff101ee00e)
 [![Swift Package Manager](https://img.shields.io/badge/swift%20package%20manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![Platform](https://img.shields.io/cocoapods/p/Burritos.svg)](https://github.com/guillermomuntaner/Burritos)
+
 
 A collection of well tested Swift Property Wrappers.
 
@@ -36,7 +38,7 @@ Xcode Beta 11.0 & Swift 5.1
 If you already have a Package.swift or you are building your own package simply add a new dependency:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/guillermomuntaner/Burritos", from: "0.0.1")
+    .package(url: "https://github.com/guillermomuntaner/Burritos", from: "0.0.2")
 ]
 ```
 
@@ -293,6 +295,7 @@ Interesting reads:
 * [SwiftLee: Property wrappers to remove boilerplate code in Swift](https://www.avanderlee.com/swift/property-wrappers/)
 * [Majid's: Understanding Property Wrappers in SwiftUI](https://mecid.github.io/2019/06/12/understanding-property-wrappers-in-swiftui/)
 * [Swift by Sundell: The Swift 5.1 features that power SwiftUI’s API](https://www.swiftbysundell.com/posts/the-swift-51-features-that-power-swiftuis-api)
+* [NSHipster article](https://nshipster.com/propertywrapper/)
 
 
 Equivalents in other languages:

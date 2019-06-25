@@ -35,7 +35,7 @@ import Foundation
 /// [obj.io](https://www.objc.io/blog/2019/01/15/atomic-variables-part-2/)
 @available(iOS 2.0, OSX 10.0, tvOS 9.0, watchOS 2.0, *)
 @propertyWrapper
-final class AtomicWrite<Value> {
+public struct AtomicWrite<Value> {
     
     // TODO: Faster version with os_unfair_lock?
     
@@ -58,7 +58,7 @@ final class AtomicWrite<Value> {
     /// Atomically mutate the variable (read-modify-write).
     ///
     /// - parameter action: A closure executed with atomic in-out access to the wrapped property.
-    public func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
+    public mutating func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
         return try queue.sync(flags: .barrier) {
             try mutation(&storage)
         }

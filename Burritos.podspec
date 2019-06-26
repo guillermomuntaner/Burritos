@@ -11,6 +11,7 @@ A collection of well tested Swift Property Wrappers.
   * @Expirable
   * @LateInit
   * @Lazy
+  * @LazyConstant
   * @UndoRedo
   * @UserDefault
   * More coming ...
@@ -66,6 +67,11 @@ A collection of well tested Swift Property Wrappers.
   ## @Lazy
   s.subspec 'Lazy' do |sp|
     sp.source_files = 'Sources/Lazy/*'
+  end
+
+  ## @LazyConstant
+    s.subspec 'LazyConstant' do |sp|
+    sp.source_files = 'Sources/LazyConstant/*'
   end
 
   ## @UndoRedo

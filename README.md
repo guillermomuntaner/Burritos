@@ -14,6 +14,7 @@ A collection of well tested Swift Property Wrappers.
 - [@Expirable](#Expirable)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
+- [@LazyConstant](#LazyConstant)
 - [@UndoRedo](#UndoRedo)
 - [@UserDefault](#UserDefault)
 - More coming ...
@@ -186,13 +187,31 @@ text = "Hello, World!"
 
 ## @Lazy
 
-A reimplementation of Swift `lazy` syntax sugar using a property wrapper.
+A property wrapper which delays instantiation until first read access.
+It is a reimplementation of Swift `lazy` modifier using a property wrapper.
 
 ```swift
-lazy var helloWorld = "Hello, World!"
-// or 
-@Lazy var helloWorld = "Hello, World!"
+@Lazy var result = expensiveOperation()
+...
+print(result) // expensiveOperation() is executed at this point
 ```
+
+As an extra on top of `lazy` it offers reseting the wrapper to its "uninitialized" state.
+
+
+## @LazyConstant
+
+Same as [@Lazy](#Lazy) + prevents changing or mutating its wrapped value.
+
+```swift
+@LazyConstant var result = expensiveOperation()
+...
+print(result) // expensiveOperation() is executed at this point
+
+result = newResult // Compiler error
+```
+
+**Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `$value = LazyConstant(initialValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
 
 
 ## @UndoRedo

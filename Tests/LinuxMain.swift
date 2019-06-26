@@ -17,6 +17,7 @@ tests += CopyingTests.allTests()
 tests += ExpirableTests.allTests()
 tests += LateInitTests.allTests()
 tests += LazyTests.allTests()
+tests += LazyConstantTests.allTests()
 tests += UndoRedoTests.allTests()
 tests += UserDefaultTests.allTests()
 

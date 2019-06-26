@@ -1,19 +1,19 @@
 //
-//  LazyTests.swift
+//  File.swift
 //  
 //
-//  Created by Guillermo Muntaner Perelló on 16/06/2019.
+//  Created by Guillermo Muntaner Perelló on 26/06/2019.
 //
 
 import XCTest
-@testable import Lazy
+@testable import LazyConstant
 
-final class LazyTests: XCTestCase {
+final class LazyConstantTests: XCTestCase {
     
-    @Lazy var text = "Hello, World!"
+    @LazyConstant var text = "Hello, World!"
     
     override func setUp() {
-        $text = Lazy(initialValue: "Hello, World!")
+        $text = LazyConstant(initialValue: "Hello, World!")
     }
     
     func testLazyInternalStorage() {
@@ -25,13 +25,6 @@ final class LazyTests: XCTestCase {
         XCTAssertEqual($text.storage, "Hello, World!")
     }
     
-    func testSet() {
-        text = "New text"
-        
-        XCTAssertEqual(text, "New text")
-        XCTAssertEqual($text.storage, "New text")
-    }
-    
     func testReset() {
         _ = text // Force init
         
@@ -39,10 +32,11 @@ final class LazyTests: XCTestCase {
         XCTAssertNil($text.storage)
     }
     
+    // MARK : LazyConstant
+    
     static var allTests = [
         ("testLazyInternalStorage", testLazyInternalStorage),
         ("testGet", testGet),
-        ("testSet", testSet),
         ("testReset", testReset),
     ]
 }

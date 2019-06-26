@@ -100,28 +100,8 @@ A property wrapper arround UIColor to easily support dark mode.
 @DynamicUIColor(light: .white, dark: .black)
 var backgroundColor: UIColor
 
-view.backgroundColor = backgroundColor // .white for light mode, .black for dark mode.
-```
-
-To propery support dark mode you should set your colors on load and any time the `userInterfaceStyle` changes. You can use the `UIViewController.traitCollectionDidChange` method to detect changes:
-
-```swift
-override func viewDidLoad() {
-    super.viewDidLoad()
-    bindColors() // Set initial value
-}
-
-override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    super.traitCollectionDidChange(previousTraitCollection)
-    if previousTraitCollection.userInterfaceStyle != UITraitCollection.current.userInterfaceStyle {
-        bindColors() // userInterfaceStyle has changed; reset colors
-    }
-}
-
-func bindColors() {
-    view.backgroundColor = backgroundColor
-    ...
-}
+// .white for light mode, .black for dark mode with automatic updating on iOS 13
+view.backgroundColor = backgroundColor
 ```
 
 Original idea courtesy of [@bardonadam](https://twitter.com/bardonadam)

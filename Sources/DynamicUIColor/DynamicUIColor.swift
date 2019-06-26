@@ -17,64 +17,38 @@ import UIKit
 /// @DynamicUIColor(light: .white, dark: .black)
 /// var backgroundColor: UIColor
 ///
-/// // Set the color every time traits change
+/// // The color will automatically update when traits change
 /// view.backgroundColor = backgroundColor
 /// ```
 ///
 /// [Courtesy of @bardonadam](https://twitter.com/bardonadam)
 @propertyDelegate
 public struct DynamicUIColor {
-    
+
     let light: UIColor
     let dark: UIColor
-    let userInterfaceStyleProvider: () -> UserInterfaceStyle
-    
+
     public init(
         light: UIColor,
-        dark: UIColor,
-        userInterfaceStyle: @autoclosure @escaping () -> UserInterfaceStyle = .current
+        dark: UIColor
     ) {
         self.light = light
         self.dark = dark
-        self.userInterfaceStyleProvider = userInterfaceStyle
     }
-    
-    public var value: UIColor {
-        switch userInterfaceStyleProvider() {
-        case .light: return light
-        case .dark: return dark
-        }
-    }
-}
 
-/// Backwards compatible wrapper arround UIUserInterfaceStyle
-public enum UserInterfaceStyle {
-    case light, dark
-    
-    /// In iOS >=13 it returns `UITraitCollection.current.userInterfaceStyle` mapped to UserInterfaceStyle.
-    /// In prior versions it returns .light.
-    public static var current: UserInterfaceStyle  {
-        #if os(iOS) || os(tvOS)
+    public var value: UIColor {
         if #available(iOS 13.0, tvOS 13.0, *) {
-            return .init(style: UITraitCollection.current.userInterfaceStyle)
+            return UIColor { traitCollection in
+                switch traitCollection.userInterfaceStyle {
+                case .dark: return self.dark
+                case .light, .unspecified: return self.light
+                @unknown default: return self.light
+                }
+            }
         } else {
-            return .light
-        }
-        #else
-        return .light
-        #endif
-    }
-    
-    #if os(iOS) || os(tvOS)
-    @available(iOS 12.0, tvOS 10.0, *)
-    init(style: UIUserInterfaceStyle) {
-        switch style {
-        case .light, .unspecified: self = .light
-        case .dark: self = .dark
-        @unknown default: self = .light
+            return light
         }
     }
-    #endif
 }
 
 #endif

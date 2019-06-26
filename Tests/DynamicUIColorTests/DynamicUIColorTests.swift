@@ -11,33 +11,34 @@ import XCTest
 @testable import DynamicUIColor
 
 final class DynamicUIColorTests: XCTestCase {
-    
+
     @DynamicUIColor(light: .white, dark: .black)
     var backgroundColor: UIColor
-    
-    static var style: UserInterfaceStyle = .light
-        
-    override func setUp() {
-        $backgroundColor = DynamicUIColor(
-            light: .white,
-            dark: .black,
-            userInterfaceStyle: DynamicUIColorTests.style
-        )
-    }
-    
+
     func testGetLight() {
-        DynamicUIColorTests.style = .light
-        XCTAssertEqual(backgroundColor, UIColor.white)
+        if #available(iOS 13, tvOS 13, *) {
+            let lightTrait = UITraitCollection(userInterfaceStyle: .light)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: lightTrait), .white)
+        }
     }
-    
+
     func testGetDark() {
-        DynamicUIColorTests.style = .dark
-        XCTAssertEqual(backgroundColor, UIColor.black)
+        if #available(iOS 13, tvOS 13, *) {
+            let darkTrait = UITraitCollection(userInterfaceStyle: .dark)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: darkTrait), .black)
+        }
     }
-    
+
+    func testLessThaniOS13() {
+        if #available(iOS 13, tvOS 13, *) {} else {
+            XCTAssertEqual(backgroundColor, .white)
+        }
+    }
+
     static var allTests = [
         ("testGetLight", testGetLight),
         ("testGetDark", testGetDark),
+        ("testLessThaniOS13", testLessThaniOS13),
     ]
 }
 

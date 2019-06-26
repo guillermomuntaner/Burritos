@@ -8,6 +8,7 @@
 A collection of well tested Swift Property Wrappers.
 
 - [@AtomicWrite](#AtomicWrite)
+- [@Clamping](#Clamping)
 - [@Copying](#Copying)
 - [@DynamicUIColor](#DynamicUIColor)
 - [@Expirable](#Expirable)
@@ -74,6 +75,21 @@ DispatchQueue.concurrentPerform(iterations: 1000) { index in
 }
 
 print(count) // 1099
+```
+
+## @Clamping
+
+ A property wrapper that automatically clamps its wrapped value in a range.
+ 
+```swift
+@Clamping(value: 0.0, range: 0...1)
+var alpha: Double
+
+alpha = 2.5
+print(alpha) // 1.0
+
+alpha = -1.0
+print(alpha) // 0.0
 ```
 
 
@@ -230,12 +246,12 @@ TODO
 ## Command line parameters
 TODO
 
-## Weak
-TODO
 
 ## Property observer -> willSet, didSet !
-TODO
+TODO: Reimplement 
 
+## Print/Log
+TODO: A property wrapper that prints/logs any value set. 
 
 ## About Property Wrappers
 

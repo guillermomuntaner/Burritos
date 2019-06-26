@@ -38,8 +38,6 @@ final class AtomicWriteTests: XCTestCase {
         XCTAssertNotEqual(count, iterations)
     }
     
-    @AtomicWrite var atomicCount2: Int = 0
-    
     func testMutateHelperForExclusiveReadWrite() {
         DispatchQueue.concurrentPerform(iterations: iterations) { index in
             $count.mutate {

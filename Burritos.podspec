@@ -5,6 +5,7 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 A collection of well tested Swift Property Wrappers.
   * @AtomicWrite
+  * @Clamping
   * @Copying
   * @DynamicUIColor
   * @Expirable
@@ -32,6 +33,11 @@ A collection of well tested Swift Property Wrappers.
   s.subspec 'AtomicWrite' do |sp|
     sp.source_files = 'Sources/AtomicWrite/*'
     sp.framework = 'Foundation'
+  end
+
+  ## @Clamping
+  s.subspec 'Clamping' do |sp|
+   sp.source_files = 'Sources/Clamping/*'
   end
 
   ## @Copying

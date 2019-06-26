@@ -1,6 +1,7 @@
 import XCTest
 
 import AtomicWriteTests
+import ClampingTests
 import CopyingTests
 import ExpirableTests
 import LateInitTests
@@ -10,6 +11,7 @@ import UserDefaultTests
 
 var tests = [XCTestCaseEntry]()
 tests += AtomicWriteTests.allTests()
+tests += ClampingTests.allTests()
 tests += CopyingTests.allTests()
 // DynamicUIColor is only supported in iOS (UIKit)
 tests += ExpirableTests.allTests()

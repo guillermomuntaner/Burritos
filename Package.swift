@@ -11,6 +11,7 @@ let package = Package(
             name: "Burritos",
             targets: [
                 "AtomicWrite",
+                "Clamping",
                 "Copying",
                 "DynamicUIColor",
                 "Expirable",
@@ -30,6 +31,8 @@ let package = Package(
         // Also add "{Wrap}" to the products library targets list.
         .target(name: "AtomicWrite", dependencies: []),
         .testTarget(name: "AtomicWriteTests", dependencies: ["AtomicWrite"]),
+        .target(name: "Clamping", dependencies: []),
+        .testTarget(name: "ClampingTests", dependencies: ["Clamping"]),
         .target(name: "Copying", dependencies: []),
         .testTarget(name: "CopyingTests", dependencies: ["Copying"]),
         .target(name: "DynamicUIColor", dependencies: []),

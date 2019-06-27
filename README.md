@@ -94,14 +94,34 @@ public func updatePath(_ path: UIBezierPath) {
 
 ## @DynamicUIColor
 
-A property wrapper arround UIColor to easily support dark mode.
+A property wrapper arround UIColor to support dark mode.
 
-```swift 
+By default in iOS >= 13 it uses the new system wide user interface style trait and dynamic UIColor constructor to support dark mode without any extra effort. On prior iOS versions it defaults to light.
+```swift
 @DynamicUIColor(light: .white, dark: .black)
 var backgroundColor: UIColor
 
-// .white for light mode, .black for dark mode with automatic updating on iOS 13
+// The color will automatically update when traits change
 view.backgroundColor = backgroundColor
+```
+
+To support older iOS versions  and custom logics (e.g. a switch in your app settings) the constructor can take an extra `style` closure that dynamically dictates which color to use. Returning a `nil` value results in the prior default behaviour. This logic allows easier backwards compatiblity by doing:
+
+```swift
+let color = DynamicUIColor(light: .white, dark: .black) {
+    if #available(iOS 13.0, *) { return nil }
+    else { return Settings.isDarkMode ? .dark : .light }
+}
+
+view.backgroundColor = color.value
+
+// On iOS <13 you might need to manually observe your custom dark
+// mode settings & re-bind your colors on changes:
+if #available(iOS 13.0, *) {} else {
+    Settings.onDarkModeChange { [weak self] in
+        self?.view.backgroundColor = self?.color.value
+    }
+}
 ```
 
 Original idea courtesy of [@bardonadam](https://twitter.com/bardonadam)

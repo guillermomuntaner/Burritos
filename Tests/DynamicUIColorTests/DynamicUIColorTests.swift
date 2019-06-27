@@ -15,30 +15,48 @@ final class DynamicUIColorTests: XCTestCase {
     @DynamicUIColor(light: .white, dark: .black)
     var backgroundColor: UIColor
 
-    func testGetLight() {
+    static var style: DynamicUIColor.Style = .light
+    
+    func testGetWithDefaultStyle() {
+        $backgroundColor = DynamicUIColor(light: .white, dark: .black)
+        
         if #available(iOS 13, tvOS 13, *) {
             let lightTrait = UITraitCollection(userInterfaceStyle: .light)
             XCTAssertEqual(backgroundColor.resolvedColor(with: lightTrait), .white)
-        }
-    }
-
-    func testGetDark() {
-        if #available(iOS 13, tvOS 13, *) {
             let darkTrait = UITraitCollection(userInterfaceStyle: .dark)
             XCTAssertEqual(backgroundColor.resolvedColor(with: darkTrait), .black)
-        }
-    }
-
-    func testLessThaniOS13() {
-        if #available(iOS 13, tvOS 13, *) {} else {
+        } else {
             XCTAssertEqual(backgroundColor, .white)
         }
     }
+    
+    func testGetWithNilStyle() {
+        $backgroundColor = DynamicUIColor(light: .white, dark: .black, style: nil)
+        
+        if #available(iOS 13, tvOS 13, *) {
+            let lightTrait = UITraitCollection(userInterfaceStyle: .light)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: lightTrait), .white)
+            let darkTrait = UITraitCollection(userInterfaceStyle: .dark)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: darkTrait), .black)
+        } else {
+            XCTAssertEqual(backgroundColor, .white)
+        }
+    }
+    
+    func testGetWithCustomStyle() {
+        $backgroundColor = DynamicUIColor(light: .white, dark: .black, style: DynamicUIColorTests.style)
+        
+        DynamicUIColorTests.style = .light
+        XCTAssertEqual(backgroundColor, .white)
+        
+        DynamicUIColorTests.style = .dark
+        XCTAssertEqual(backgroundColor, .black)
+    }
 
     static var allTests = [
-        ("testGetLight", testGetLight),
-        ("testGetDark", testGetDark),
-        ("testLessThaniOS13", testLessThaniOS13),
+        ("testGetWithDefaultStyle", testGetWithDefaultStyle),
+        ("testGetWithNilStyle", testGetWithNilStyle),
+        ("testGetWithCustomStyle", testGetWithCustomStyle),
     ]
 }
 

@@ -46,12 +46,14 @@ dependencies: [
 
 
 ### Cocoapods
+
 Add Burritos to your Podfile:
 ```rb
-# You can add all the property wrappers
 pod 'Burritos', '~> 0.0.2'
+```
 
-# Or you can add just the ones you want
+Each wrapper is a submodule, so you add just the one(s) you want
+```rb
 pod 'Burritos/Copying', '~> 0.0.2'
 pod 'Burritos/UndoRedo', '~> 0.0.2'
 pod 'Burritos/UserDefault', '~> 0.0.2'
@@ -304,7 +306,7 @@ wrappedProperty.value
 
 // In order to avoid having to unwrap wrappedProperty.value all the time, you can use a computed property
 var value: String {
-    get { wrappedProperty.value }
+    get { return wrappedProperty.value }
     set { wrappedProperty.value = newValue }
 }
 

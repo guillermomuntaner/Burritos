@@ -13,6 +13,7 @@ let package = Package(
                 "AtomicWrite",
                 "Clamping",
                 "Copying",
+                "DefaultValue",
                 "DynamicUIColor",
                 "Expirable",
                 "LateInit",

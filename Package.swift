@@ -36,6 +36,8 @@ let package = Package(
         .testTarget(name: "ClampingTests", dependencies: ["Clamping"]),
         .target(name: "Copying", dependencies: []),
         .testTarget(name: "CopyingTests", dependencies: ["Copying"]),
+        .target(name: "DefaultValue", dependencies: []),
+        .testTarget(name: "DefaultValueTests", dependencies: ["DefaultValue"]),
         .target(name: "DynamicUIColor", dependencies: []),
         .testTarget(name: "DynamicUIColorTests", dependencies: ["DynamicUIColor"]),
         .target(name: "Expirable", dependencies: []),

@@ -2,12 +2,34 @@
 //  DefaultValue.swift
 //  Burritos
 //
+//
 //  Created by Evgeniy (@own2pwn) on 28/06/2019.
-//  Copyright © 2019 Wicked. All rights reserved.
 //
 
-import Foundation
-
+/// A property wrapper arround an implicitly unwrapped optional value which fallbacks to a given default value.
+///
+/// Seting `nil` will reset  the property to the default value. The wrapper will always return non-null value,
+/// thanks to the granted default value.
+/// Usage:
+///
+/// ```swift
+/// @DefaultValue(default: 0)
+/// var count
+/// count = 100
+/// // or
+/// @DefaultValue(default: 0, initial: 100)
+/// var count
+///
+/// // Assigning nil resets to the default value
+/// print(count) // 100
+/// count = nil
+/// print(count) // 0
+/// ```
+///
+/// - Note: Since this wrapper relies on an implicitly unwrapped optional, using optionals as the wrapper type is
+/// discouraged since they will be flattered. Getting the value is always a flat implicit unwrapped optional and assigning
+/// `nil` is always reseting to the default value. Two levels of optionality need to be nested in order to be able to store
+/// null values.
 @propertyWrapper
 public struct DefaultValue<Value> {
     // MARK: - Members
@@ -16,7 +38,7 @@ public struct DefaultValue<Value> {
 
     private let defaultValue: Value
 
-    // MARK: - Interface
+    // MARK: - Property wrapper interface
 
     public var value: Value! {
         get {
@@ -32,8 +54,16 @@ public struct DefaultValue<Value> {
     }
 
     // MARK: - Init
-
-    public init(value: Value) {
-        defaultValue = value
+    
+    public init(default: Value, initial: Value? = nil) {
+        self.defaultValue = `default`
+        storage = initial
+    }
+    
+    // MARK: - Public API
+    
+    /// Resets the wrapper to its default value.  This is equivalent to setting nil.
+    public mutating func reset() {
+        storage = nil
     }
 }

@@ -1,91 +1,75 @@
 //
 //  DefaultValueTests.swift
-//  DefaultValueTests
+//  Burritos
 //
 //  Created by Evgeniy (@own2pwn) on 28/06/2019.
-//  Copyright © 2019 Wicked. All rights reserved.
 //
 
 @testable import DefaultValue
 import XCTest
 
 final class DefaultValueTests: XCTestCase {
+    
     // MARK: - Members
-
-    private static let defaultValue: Double = 4
-
-    @DefaultValue(value: DefaultValueTests.defaultValue)
-    var dummy: Double?
-
-    @DefaultValue(value: ComplextType.Default)
-    var complextType: ComplextType?
-
+    
+    private static let defaultValue = 4.0
+    
+    // MARK: - Members
+    
+    @DefaultValue(default: DefaultValueTests.defaultValue)
+    var double
+    
+    @DefaultValue(default: "Hello, World!")
+    var optional: String?
+    
     // MARK: - Tests
-
+    
+    override func setUp() {
+        $double = DefaultValue(default: DefaultValueTests.defaultValue)
+        $optional = DefaultValue(default: "Hello, World!")
+    }
+    
     func testGetDefaultValue() {
-        let expected: Double = DefaultValueTests.defaultValue
-        let actual: Double = $dummy.value
-
-        XCTAssertEqual(actual, expected)
+        XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }
 
-    func testGet() {
-        dummy = 5
-        let expected: Double = 5
-        let actual: Double = $dummy.value
-
-        XCTAssertEqual(actual, expected)
+    func testGetNonDefaultValue() {
+        $double = DefaultValue(default: DefaultValueTests.defaultValue, initial: 5)
+        XCTAssertEqual(double, 5)
     }
 
     func testSet() {
-        $dummy.value = 6
-        let expected: Double = 6
-        let actual: Double = $dummy.value
-
-        XCTAssertEqual(actual, expected)
+        double = 6
+        XCTAssertEqual(double, 6)
     }
 
-    func testDirect() {
-        $dummy.value = 7
-        let expected: Double = 7
-        let actual: Double? = dummy
-        XCTAssertEqual(actual, expected)
-
-        dummy = nil
-        XCTAssertEqual($dummy.value, DefaultValueTests.defaultValue)
-
-        $dummy.value = nil
-        XCTAssertEqual($dummy.value, DefaultValueTests.defaultValue)
+    func testResetBySettingNil() {
+        $double = DefaultValue(default: DefaultValueTests.defaultValue, initial: 5)
+        double = nil
+        XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }
-
-    func testComplextType() {
-        let expectedInt: Int = 1
-        let expectedStr: String = "2"
-
-        let complexValue: ComplextType = $complextType.value
-        let actualInt: Int = complexValue.intVar
-        let actualStr: String = complexValue.strVar
-
-        XCTAssertEqual(actualInt, expectedInt)
-        XCTAssertEqual(actualStr, expectedStr)
+    
+    func testReset() {
+        $double = DefaultValue(default: DefaultValueTests.defaultValue, initial: 5)
+        $double.reset()
+        XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }
-
+    
+    func testOptionalReset() {
+        $optional = DefaultValue(default: "Hello, World!")
+        optional = "Yay"
+        optional = nil
+        XCTAssertEqual(optional, "Hello, World!")
+    }
+    
     // MARK: - Helpers
 
     static var allTests = [
         ("testGetDefaultValue", testGetDefaultValue),
-        ("testGet", testGet),
+        ("testGetNonDefaultValue", testGetNonDefaultValue),
         ("testSet", testSet),
-        ("testDirect", testDirect),
-        ("testComplextType", testComplextType),
+        ("testResetBySettingNil", testResetBySettingNil),
+        ("testReset", testReset),
+        ("testOptionalReset", testOptionalReset),
     ]
-}
-
-struct ComplextType {
-    let intVar: Int
-    let strVar: String
-
-    static let Default: ComplextType = {
-        ComplextType(intVar: 1, strVar: "2")
-    }()
 }

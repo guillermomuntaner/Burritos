@@ -3,7 +3,7 @@ import XCTest
 import AtomicWriteTests
 import ClampingTests
 import CopyingTests
-import DefaultValue
+import DefaultValueTests
 import ExpirableTests
 import LateInitTests
 import LazyTests

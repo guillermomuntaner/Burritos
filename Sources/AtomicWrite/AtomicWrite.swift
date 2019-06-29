@@ -51,7 +51,7 @@ public struct AtomicWrite<Value> {
             return queue.sync { storage }
         }
         set {
-            queue.sync(flags: .barrier) { storage = newValue }
+            queue.async(flags: .barrier) { storage = newValue }
         }
     }
     
@@ -59,7 +59,7 @@ public struct AtomicWrite<Value> {
     ///
     /// - parameter action: A closure executed with atomic in-out access to the wrapped property.
     public mutating func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
-        return try queue.sync(flags: .barrier) {
+        return try queue.async(flags: .barrier) {
             try mutation(&storage)
         }
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// A  property wrapper to set and get environment variables values.
+/// A  property wrapper to set and get system's environment variables values.
 ///
 /// ```
 /// @EnvironmentVariable(name: "PATH")

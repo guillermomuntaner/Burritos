@@ -6,6 +6,7 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(AtomicWriteTests.allTests),
         testCase(ClampingTests.allTests),
         testCase(CopyingTests.allTests),
+        testCase(DefaultValueTests.allTests),
         #if canImport(UIKit) {
             testCase(DynamicUIColor.allTests),
         }

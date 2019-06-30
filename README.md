@@ -10,6 +10,7 @@ A collection of well tested Swift Property Wrappers.
 - [@AtomicWrite](#AtomicWrite)
 - [@Clamping](#Clamping)
 - [@Copying](#Copying)
+- [@DefaultValue](#DefaultValue)
 - [@DynamicUIColor](#DynamicUIColor)
 - [@Expirable](#Expirable)
 - [@LateInit](#LateInit)
@@ -109,6 +110,25 @@ public func updatePath(_ path: UIBezierPath) {
     // You don't need to worry whoever called this method mutates the passed by reference path.
     // Your stored self.path contains a copy.
 }
+```
+
+
+## @DefaultValue
+
+A property wrapper arround an implicitly unwrapped optional value which fallbacks to a given default value.
+
+```swift
+@DefaultValue(default: 0)
+var count
+count = 100
+// or
+@DefaultValue(default: 0, initial: 100)
+var count
+
+// Assigning nil resets to the default value
+print(count) // 100
+count = nil
+print(count) // 0
 ```
 
 ## @DynamicUIColor

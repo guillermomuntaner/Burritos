@@ -11,6 +11,7 @@ A collection of well tested Swift Property Wrappers.
 - [@Clamping](#Clamping)
 - [@Copying](#Copying)
 - [@DynamicUIColor](#DynamicUIColor)
+- [@EnvironmentVariable](#EnvironmentVariable)
 - [@Expirable](#Expirable)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
@@ -145,6 +146,18 @@ func bindColors() {
 
 Original idea courtesy of [@bardonadam](https://twitter.com/bardonadam)
 
+## @EnvironmentVariable
+
+A  property wrapper to set and get system environment variables values.
+
+ ```swift
+@EnvironmentVariable(name: "PATH")
+var path: String?
+
+// You can set the environment variable directly:
+path = "~/opt/bin:" + path!
+
+```
 
 ## @Expirable
 

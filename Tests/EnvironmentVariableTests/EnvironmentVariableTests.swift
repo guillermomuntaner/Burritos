@@ -12,10 +12,6 @@ final class EnvironmentVariableTests: XCTestCase {
     
     @EnvironmentVariable(name: "ENV_VAR") var envVar: String?
     
-    override func setUp() {
-        $envVar = EnvironmentVariable(name: "ENV_VAR")
-    }
-    
     func testGetAndSet() {
         XCTAssertNil(envVar)
         

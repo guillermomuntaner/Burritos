@@ -12,6 +12,7 @@ A collection of well tested Swift Property Wrappers.
 - [@Copying](#Copying)
 - [@DefaultValue](#DefaultValue)
 - [@DynamicUIColor](#DynamicUIColor)
+- [@EnvironmentVariable](#EnvironmentVariable)
 - [@Expirable](#Expirable)
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
@@ -165,6 +166,18 @@ if #available(iOS 13.0, *) {} else {
 
 Original idea courtesy of [@bardonadam](https://twitter.com/bardonadam)
 
+## @EnvironmentVariable
+
+A  property wrapper to set and get system environment variables values.
+
+ ```swift
+@EnvironmentVariable(name: "PATH")
+var path: String?
+
+// You can set the environment variable directly:
+path = "~/opt/bin:" + path!
+
+```
 
 ## @Expirable
 

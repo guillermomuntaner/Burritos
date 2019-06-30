@@ -59,6 +59,12 @@ A collection of well tested Swift Property Wrappers.
     sp.ios.framework = 'UIKit'
   end
 
+  ## @EnvironmentVariable
+  s.subspec 'EnvironmentVariable' do |sp|
+    sp.source_files = 'Sources/EnvironmentVariable/*'
+    sp.ios.framework = 'Foundation'
+  end
+
   ## @Expirable
   s.subspec 'Expirable' do |sp|
     sp.source_files = 'Sources/Expirable/*'

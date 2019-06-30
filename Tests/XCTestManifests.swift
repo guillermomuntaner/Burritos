@@ -9,6 +9,7 @@ public func allTests() -> [XCTestCaseEntry] {
         #if canImport(UIKit) {
             testCase(DynamicUIColor.allTests),
         }
+        testCase(EnvironmentVariableTests.allTests),
         testCase(ExpirableTests.allTests),
         testCase(LateInitTests.allTests),
         testCase(LazyTests.allTests),

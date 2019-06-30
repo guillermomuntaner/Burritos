@@ -11,33 +11,52 @@ import XCTest
 @testable import DynamicUIColor
 
 final class DynamicUIColorTests: XCTestCase {
-    
+
     @DynamicUIColor(light: .white, dark: .black)
     var backgroundColor: UIColor
+
+    static var style: DynamicUIColor.Style = .light
     
-    static var style: UserInterfaceStyle = .light
+    func testGetWithDefaultStyle() {
+        $backgroundColor = DynamicUIColor(light: .white, dark: .black)
         
-    override func setUp() {
-        $backgroundColor = DynamicUIColor(
-            light: .white,
-            dark: .black,
-            userInterfaceStyle: DynamicUIColorTests.style
-        )
+        if #available(iOS 13, tvOS 13, *) {
+            let lightTrait = UITraitCollection(userInterfaceStyle: .light)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: lightTrait), .white)
+            let darkTrait = UITraitCollection(userInterfaceStyle: .dark)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: darkTrait), .black)
+        } else {
+            XCTAssertEqual(backgroundColor, .white)
+        }
     }
     
-    func testGetLight() {
+    func testGetWithNilStyle() {
+        $backgroundColor = DynamicUIColor(light: .white, dark: .black, style: nil)
+        
+        if #available(iOS 13, tvOS 13, *) {
+            let lightTrait = UITraitCollection(userInterfaceStyle: .light)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: lightTrait), .white)
+            let darkTrait = UITraitCollection(userInterfaceStyle: .dark)
+            XCTAssertEqual(backgroundColor.resolvedColor(with: darkTrait), .black)
+        } else {
+            XCTAssertEqual(backgroundColor, .white)
+        }
+    }
+    
+    func testGetWithCustomStyle() {
+        $backgroundColor = DynamicUIColor(light: .white, dark: .black, style: DynamicUIColorTests.style)
+        
         DynamicUIColorTests.style = .light
-        XCTAssertEqual(backgroundColor, UIColor.white)
-    }
-    
-    func testGetDark() {
+        XCTAssertEqual(backgroundColor, .white)
+        
         DynamicUIColorTests.style = .dark
-        XCTAssertEqual(backgroundColor, UIColor.black)
+        XCTAssertEqual(backgroundColor, .black)
     }
-    
+
     static var allTests = [
-        ("testGetLight", testGetLight),
-        ("testGetDark", testGetDark),
+        ("testGetWithDefaultStyle", testGetWithDefaultStyle),
+        ("testGetWithNilStyle", testGetWithNilStyle),
+        ("testGetWithCustomStyle", testGetWithCustomStyle),
     ]
 }
 

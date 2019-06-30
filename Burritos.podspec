@@ -7,6 +7,7 @@ A collection of well tested Swift Property Wrappers.
   * @AtomicWrite
   * @Clamping
   * @Copying
+  * @DefaultValue
   * @DynamicUIColor
   * @Expirable
   * @LateInit
@@ -45,6 +46,11 @@ A collection of well tested Swift Property Wrappers.
   s.subspec 'Copying' do |sp|
     sp.source_files = 'Sources/Copying/*'
     sp.framework = 'Foundation'
+  end
+
+  ## @DefaultValue
+    s.subspec 'DefaultValue' do |sp|
+    sp.source_files = 'Sources/DefaultValue/*'
   end
 
   ## @Copying

@@ -27,7 +27,8 @@ public struct EnvironmentVariable {
     
     public var value: String? {
         get {
-            return ProcessInfo.processInfo.environment[name]
+            guard let pointer = getenv(name) else { return nil }
+            return String(cString: pointer)
         }
         set {
             guard let value = newValue else {

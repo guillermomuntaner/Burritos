@@ -17,7 +17,7 @@ final class DefaultValueTests: XCTestCase {
     // MARK: - Members
     
     @DefaultValue(default: DefaultValueTests.defaultValue)
-    var double
+    var double = 5
     
     @DefaultValue(default: "Hello, World!")
     var optional: String?
@@ -34,7 +34,7 @@ final class DefaultValueTests: XCTestCase {
     }
 
     func testGetNonDefaultValue() {
-        $double = DefaultValue(default: DefaultValueTests.defaultValue, initial: 5)
+        $double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
         XCTAssertEqual(double, 5)
     }
 
@@ -44,13 +44,13 @@ final class DefaultValueTests: XCTestCase {
     }
 
     func testResetBySettingNil() {
-        $double = DefaultValue(default: DefaultValueTests.defaultValue, initial: 5)
+        $double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
         double = nil
         XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }
     
     func testReset() {
-        $double = DefaultValue(default: DefaultValueTests.defaultValue, initial: 5)
+        $double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
         $double.reset()
         XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }

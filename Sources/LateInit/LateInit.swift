@@ -24,7 +24,7 @@
 /// // Initialize later in your code:
 /// text = "Hello, World!"
 ///
-@propertyDelegate
+@propertyWrapper
 public struct LateInit<Value> {
     
     var storage: Value?
@@ -33,7 +33,7 @@ public struct LateInit<Value> {
         storage = nil
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         get {
             guard let storage = storage else {
                 fatalError("Trying to access LateInit.value before setting it.")

@@ -25,7 +25,7 @@ import Foundation
 public struct EnvironmentVariable {
     var name: String
     
-    public var value: String? {
+    public var wrappedValue: String? {
         get {
             guard let pointer = getenv(name) else { return nil }
             return String(cString: pointer)

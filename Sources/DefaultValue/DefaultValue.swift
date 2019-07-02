@@ -17,8 +17,8 @@
 /// var count
 /// count = 100
 /// // or
-/// @DefaultValue(default: 0, initial: 100)
-/// var count
+/// @DefaultValue(default: 0)
+/// var count = 100
 ///
 /// // Assigning nil resets to the default value
 /// print(count) // 100
@@ -40,7 +40,7 @@ public struct DefaultValue<Value> {
 
     // MARK: - Property wrapper interface
 
-    public var value: Value! {
+    public var wrappedValue: Value! {
         get {
             if let unboxed = storage {
                 return unboxed
@@ -55,9 +55,9 @@ public struct DefaultValue<Value> {
 
     // MARK: - Init
     
-    public init(default: Value, initial: Value? = nil) {
-        self.defaultValue = `default`
-        storage = initial
+    public init(initialValue: Value? = nil, default: Value) {
+        defaultValue = `default`
+        storage = initialValue
     }
     
     // MARK: - Public API

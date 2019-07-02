@@ -26,7 +26,7 @@ A collection of well tested Swift Property Wrappers.
 Property Wrappers were announced by Apple during WWDC 2019. They are a fundamental component in SwiftUI syntax sugar hence Apple pushed them into the Swift 5.1 beta, skipping the normal Swift Evolution process. Final proposals are being discussed right now in the forums so keep in ming the API can change.
 
 ## Requirements
-Xcode Beta 11.0 & Swift 5.1
+Xcode 11.0 Beta 3 & Swift 5.1
 
 ## Installation
 
@@ -87,8 +87,8 @@ print(count) // 1099
  A property wrapper that automatically clamps its wrapped value in a range.
  
 ```swift
-@Clamping(value: 0.0, range: 0...1)
-var alpha: Double
+@Clamping(range: 0...1)
+var alpha: Double = 0.0
 
 alpha = 2.5
 print(alpha) // 1.0
@@ -123,8 +123,8 @@ A property wrapper arround an implicitly unwrapped optional value which fallback
 var count
 count = 100
 // or
-@DefaultValue(default: 0, initial: 100)
-var count
+@DefaultValue(default: 0)
+var count = 100
 
 // Assigning nil resets to the default value
 print(count) // 100

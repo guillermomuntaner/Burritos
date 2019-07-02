@@ -51,12 +51,12 @@ public struct Expirable<Value> {
     /// wrapper will simply treat the initial value as expired inmediatly.
     ///
     /// The duration will be ignored for this initial value but will be used as soon as a new value is set.
-    public init(initialValue value: Value, expirationDate: Date, duration: TimeInterval) {
+    public init(initialValue: Value, expirationDate: Date, duration: TimeInterval) {
         self.duration = duration
-        storage = (value, expirationDate)
+        storage = (initialValue, expirationDate)
     }
     
-    public var value: Value? {
+    public var wrappedValue: Value? {
         get {
             isValid ? storage?.value : nil
         }

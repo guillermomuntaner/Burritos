@@ -45,7 +45,7 @@ import UIKit
 /// ```
 ///
 /// [Courtesy of @bardonadam](https://twitter.com/bardonadam)
-@propertyDelegate
+@propertyWrapper
 public struct DynamicUIColor {
 
     /// Backwards compatible wrapper arround UIUserInterfaceStyle
@@ -67,7 +67,7 @@ public struct DynamicUIColor {
         self.styleProvider = style
     }
 
-    public var value: UIColor {
+    public var wrappedValue: UIColor {
         switch styleProvider() {
         case .dark: return dark
         case .light: return light

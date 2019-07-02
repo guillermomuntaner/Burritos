@@ -8,8 +8,8 @@
 /// A property wrapper that automatically clamps its wrapped value in a range.
 ///
 /// ```
-/// @Clamping(value: 0.0, range: 0...1)
-/// var alpha: Double
+/// @Clamping(range: 0...1)
+/// var alpha: Double = 0.0
 ///
 /// alpha = 2.5
 /// print(alpha) // 1.0
@@ -27,12 +27,12 @@ public struct Clamping<Value: Comparable> {
     var storage: Value
     let range: ClosedRange<Value>
     
-    public init(value: Value, range: ClosedRange<Value>) {
+    public init(initialValue: Value, range: ClosedRange<Value>) {
         self.range = range
-        self.storage = range.clamp(value)
+        self.storage = range.clamp(initialValue)
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         get { storage }
         set { storage = range.clamp(newValue) }
     }

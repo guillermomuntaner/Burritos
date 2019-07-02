@@ -17,7 +17,7 @@ import Foundation
 ///
 /// [Apple documentation on UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults)
 @available(iOS 2.0, OSX 10.0, tvOS 9.0, watchOS 2.0, *)
-@propertyDelegate
+@propertyWrapper
 public struct UserDefault<Value: PropertyListValue> {
     let key: String
     let defaultValue: Value
@@ -29,7 +29,7 @@ public struct UserDefault<Value: PropertyListValue> {
         self.userDefaults = userDefaults
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         get {
             return userDefaults.object(forKey: key) as? Value ?? defaultValue
         }

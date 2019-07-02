@@ -18,7 +18,7 @@
 /// ```
 ///
 /// As an extra on top of `lazy` it offers reseting the wrapper to its "uninitialized" state.
-@propertyDelegate
+@propertyWrapper
 public struct Lazy<Value> {
     
     var storage: Value?
@@ -34,7 +34,7 @@ public struct Lazy<Value> {
         self.constructor = constructor
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         mutating get {
             if storage == nil {
                 self.storage = constructor()

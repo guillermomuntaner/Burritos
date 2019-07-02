@@ -10,8 +10,8 @@ import XCTest
 
 final class ClampingTests: XCTestCase {
     
-    @Clamping(value: 0.3, range: 0...1)
-    var alpha: Double
+    @Clamping(range: 0...1)
+    var alpha: Double = 0.3
 
     override func setUp() {
         alpha = 0.3
@@ -26,20 +26,20 @@ final class ClampingTests: XCTestCase {
     // MARK: Init
     
     func testInitInRange() {
-        $alpha = Clamping(value: 0.5, range: 0...1)
+        $alpha = Clamping(initialValue: 0.5, range: 0...1)
         XCTAssertEqual(alpha, 0.5)
     }
 
     func testInitLessOrEqualThanLowerBound() {
         [-Double.greatestFiniteMagnitude, -1.0, 0.0].forEach { value in
-            $alpha = Clamping(value: value, range: 0...1)
+            $alpha = Clamping(initialValue: value, range: 0...1)
             XCTAssertEqual(alpha, 0)
         }
     }
 
     func testInitBiggerOrEqualThanUpperBound() {
         [1.0, 1.5, Double.greatestFiniteMagnitude, Double.infinity].forEach { value in
-            $alpha = Clamping(value: value, range: 0...1)
+            $alpha = Clamping(initialValue: value, range: 0...1)
             XCTAssertEqual(alpha, 1)
         }
     }

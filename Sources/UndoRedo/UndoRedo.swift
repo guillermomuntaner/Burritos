@@ -34,7 +34,7 @@ import Foundation
 /// [Original idea by @JeffHurray](https://twitter.com/JeffHurray/status/1137816198689673216)
 /// Ideas for API on [Foundation UndoManager](https://developer.apple.com/documentation/foundation/undomanager)
 /// [Chris Eidhof blog post](http://chris.eidhof.nl/post/undo-history-in-swift/)
-@propertyDelegate
+@propertyWrapper
 public struct UndoRedo<Value> {
     
     var index: Int
@@ -45,7 +45,7 @@ public struct UndoRedo<Value> {
         self.index = 0
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         get {
             values[index]
         }

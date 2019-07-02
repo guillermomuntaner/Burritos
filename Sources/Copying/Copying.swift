@@ -25,7 +25,7 @@ public struct Copying<Value: NSCopying> {
         storage = value
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         get { return storage }
         set { storage = newValue.copy() as! Value }
     }

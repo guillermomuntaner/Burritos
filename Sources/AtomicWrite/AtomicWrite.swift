@@ -46,7 +46,7 @@ public struct AtomicWrite<Value> {
         self.storage = value
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         get {
             return queue.sync { storage }
         }

@@ -22,7 +22,7 @@
 /// - Note: This wrapper prevents reassigning the wrapped property value but *NOT* the wrapper itself.
 /// Reassigning the wrapper `$value = LazyConstant(initialValue: "Hola!")` is possible and
 /// since wrappers themselves need to be declared variable there is no way to prevent it.
-@propertyDelegate
+@propertyWrapper
 public struct LazyConstant<Value> {
     
     private(set) var storage: Value?
@@ -38,7 +38,7 @@ public struct LazyConstant<Value> {
         self.constructor = constructor
     }
     
-    public var value: Value {
+    public var wrappedValue: Value {
         mutating get {
             if storage == nil {
                 storage = constructor()

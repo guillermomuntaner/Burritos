@@ -1,11 +1,9 @@
 //
-//  File.swift
+//  StackTests.swift
 //  
 //
 //  Created by Guillermo Muntaner Perelló on 23/06/2019.
 //
-
-import Foundation
 
 import XCTest
 @testable import Stack
@@ -34,12 +32,16 @@ final class StackTests: XCTestCase {
     }
     
     func testSet() {
-        sample = Sample(value: 1)
+        // NOTE: - Direct set results in segmentation fault
+        // sample = Sample(value: 1)
+        $sample.wrappedValue = Sample(value: 1)
         XCTAssertEqual(sample, Sample(value: 1))
     }
     
     func testSetNil() {
-        sample = nil
+        // NOTE: - Direct set results in segmentation fault
+        // sample = nil
+        $sample.wrappedValue = nil
         XCTAssertEqual(sample, Sample(value: 0))
     }
     

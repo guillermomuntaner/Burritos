@@ -5,8 +5,6 @@
 //  Created by Guillermo Muntaner Perelló on 23/06/2019.
 //
 
-import Foundation
-
 /// Implementation of a classic [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
 /// The property wrapper maps `get` to `pop` and `set` to `push` hence it behaves like a pointer to the top of the stack.
 ///
@@ -22,7 +20,7 @@ import Foundation
 ///     process(task)
 /// }
 /// ```
-@propertyDelegate
+@propertyWrapper
 public struct Stack<Value> {
     
     var stackArray: [Value]
@@ -31,17 +29,13 @@ public struct Stack<Value> {
         self.stackArray = initialValue.map { [$0] } ?? []
     }
     
-    public init(initialValues: [Value]) {
-        self.stackArray = initialValues
-    }
-    
     // MARK: Property wrapper
     
-    public var value: Value? {
+    public var wrappedValue: Value? {
         mutating get {
             return pop()
         }
-        mutating set {
+        set {
             // Ignore nil values
             guard let newElement = newValue else { return }
             push(newElement)

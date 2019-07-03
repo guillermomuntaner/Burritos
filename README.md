@@ -17,6 +17,7 @@ A collection of well tested Swift Property Wrappers.
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@LazyConstant](#LazyConstant)
+- [@Trimmed](#Trimmed)
 - [@UndoRedo](#UndoRedo)
 - [@UserDefault](#UserDefault)
 - More coming ...
@@ -247,6 +248,23 @@ result = newResult // Compiler error
 ```
 
 **Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `$value = LazyConstant(initialValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
+
+
+## @Trimmed
+
+A wrapper that automatically trims strings both on initialization and reassignment.
+
+```swift
+@Trimmed
+var text = " \n Hello, World! \n\n    "
+
+print(text) // "Hello, World!"
+
+// By default trims white spaces and new lines, but it also supports any character set
+@Trimmed(characterSet: .whitespaces)
+var text = " \n Hello, World! \n\n    "
+print(text) // "\n Hello, World! \n\n"
+```
 
 
 ## @UndoRedo

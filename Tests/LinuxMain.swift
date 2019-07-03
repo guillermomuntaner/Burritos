@@ -8,6 +8,7 @@ import EnvironmentVariableTests
 import ExpirableTests
 import LateInitTests
 import LazyTests
+import TrimmedTests
 import UndoRedoTests
 import UserDefaultTests
 
@@ -22,6 +23,7 @@ tests += ExpirableTests.allTests()
 tests += LateInitTests.allTests()
 tests += LazyTests.allTests()
 tests += LazyConstantTests.allTests()
+tests += Trimmed.allTests()
 tests += UndoRedoTests.allTests()
 tests += UserDefaultTests.allTests()
 

@@ -13,6 +13,7 @@ A collection of well tested Swift Property Wrappers.
   * @LateInit
   * @Lazy
   * @LazyConstant
+  * @Trimmed
   * @UndoRedo
   * @UserDefault
   * More coming ...
@@ -84,6 +85,12 @@ A collection of well tested Swift Property Wrappers.
   ## @LazyConstant
     s.subspec 'LazyConstant' do |sp|
     sp.source_files = 'Sources/LazyConstant/*'
+  end
+
+  ## @Trimmed
+  s.subspec 'Trimmed' do |sp|
+    sp.source_files = 'Sources/Trimmed/*'
+    sp.framework = 'Foundation'
   end
 
   ## @UndoRedo

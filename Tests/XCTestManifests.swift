@@ -12,6 +12,7 @@ public func allTests() -> [XCTestCaseEntry] {
         }
         testCase(EnvironmentVariableTests.allTests),
         testCase(ExpirableTests.allTests),
+        testCase(NotificationHandlersTests.allTests),
         testCase(LateInitTests.allTests),
         testCase(LazyTests.allTests),
         testCase(LazyConstantTests.allTests),

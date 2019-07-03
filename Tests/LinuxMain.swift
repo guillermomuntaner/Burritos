@@ -6,6 +6,7 @@ import CopyingTests
 import DefaultValueTests
 import EnvironmentVariableTests
 import ExpirableTests
+import NotificationHandlersTests
 import LateInitTests
 import LazyTests
 import UndoRedoTests
@@ -19,6 +20,7 @@ tests += DefaultValueTests.allTests()
 // DynamicUIColor is only supported in iOS (UIKit)
 tests += EnvironmentVariableTests.allTests()
 tests += ExpirableTests.allTests()
+tests += NotificationHandlersTests.allTests()
 tests += LateInitTests.allTests()
 tests += LazyTests.allTests()
 tests += LazyConstantTests.allTests()

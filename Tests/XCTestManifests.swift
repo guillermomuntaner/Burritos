@@ -18,6 +18,7 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(Trimmed.allTests),
         testCase(UndoRedoTests.allTests),
         testCase(UserDefaultTests.allTests),
+        testCase(ObservedTests.allTests),
     ]
 }
 #endif

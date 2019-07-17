@@ -19,7 +19,7 @@ final class CopyingTests: XCTestCase {
     @Copying var instance: SomeClass = .init() // Dummy value
     
     override func setUp() {
-        $instance = Copying(initialValue: initialInstance)
+        _instance = Copying(initialValue: initialInstance)
     }
     
     func testCopyOnDefaultInit() {
@@ -27,7 +27,7 @@ final class CopyingTests: XCTestCase {
     }
     
     func testInitWithoutCopying() {
-        $instance = Copying(withoutCopying: initialInstance)
+        _instance = Copying(withoutCopying: initialInstance)
         XCTAssert(instance === initialInstance)
     }
     
@@ -39,7 +39,7 @@ final class CopyingTests: XCTestCase {
     
     func testGetWithoutCopying() {
         let newInstance = SomeClass()
-        $instance.storage = newInstance
+        _instance.storage = newInstance
         XCTAssert(instance === newInstance)
     }
     

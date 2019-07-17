@@ -18,7 +18,7 @@ final class DynamicUIColorTests: XCTestCase {
     static var style: DynamicUIColor.Style = .light
     
     func testGetWithDefaultStyle() {
-        $backgroundColor = DynamicUIColor(light: .white, dark: .black)
+        _backgroundColor = DynamicUIColor(light: .white, dark: .black)
         
         if #available(iOS 13, tvOS 13, *) {
             let lightTrait = UITraitCollection(userInterfaceStyle: .light)
@@ -31,7 +31,7 @@ final class DynamicUIColorTests: XCTestCase {
     }
     
     func testGetWithNilStyle() {
-        $backgroundColor = DynamicUIColor(light: .white, dark: .black, style: nil)
+        _backgroundColor = DynamicUIColor(light: .white, dark: .black, style: nil)
         
         if #available(iOS 13, tvOS 13, *) {
             let lightTrait = UITraitCollection(userInterfaceStyle: .light)
@@ -44,7 +44,7 @@ final class DynamicUIColorTests: XCTestCase {
     }
     
     func testGetWithCustomStyle() {
-        $backgroundColor = DynamicUIColor(light: .white, dark: .black, style: DynamicUIColorTests.style)
+        _backgroundColor = DynamicUIColor(light: .white, dark: .black, style: DynamicUIColorTests.style)
         
         DynamicUIColorTests.style = .light
         XCTAssertEqual(backgroundColor, .white)

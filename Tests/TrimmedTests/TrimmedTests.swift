@@ -13,7 +13,7 @@ final class TrimmedTests: XCTestCase {
     @Trimmed var text = "   Hello, World! \n   \n"
     
     override func setUp() {
-        $text = Trimmed(initialValue: "   Hello, World! \n   \n")
+        _text = Trimmed(initialValue: "   Hello, World! \n   \n")
     }
     
     func testGet() {
@@ -26,7 +26,7 @@ final class TrimmedTests: XCTestCase {
     }
     
     func testCustomCharacterSet() {
-        $text = Trimmed(initialValue: "", characterSet: CharacterSet(charactersIn: "abcde"))
+        _text = Trimmed(initialValue: "", characterSet: CharacterSet(charactersIn: "abcde"))
         text = "abcdeHello World!abcde"
         XCTAssertEqual(text, "Hello World!")
     }

@@ -15,7 +15,7 @@ import Foundation
 /// trigger a get & a set, e.g.  when increasing a counter `count += 1`. Sadly such an atomic
 /// modification cannot be simply done with getters and setter, hence we expose  the
 /// `mutate(_ action: (inout Value) -> Void)`  method on the wrapper for this
-/// purpose which you can access with a $ prefix.
+/// purpose which you can access with a _ prefix.
 ///
 /// ```
 /// @Atomic var count = 0
@@ -24,7 +24,7 @@ import Foundation
 /// count = 100
 ///
 /// // To mutate (read-modify-write) always use the wrapper method:
-/// $count.mutate { $0 += 1 }
+/// _count.mutate { $0 += 1 }
 ///
 /// print(count) // 101
 /// ```

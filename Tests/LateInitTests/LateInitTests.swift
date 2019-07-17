@@ -13,11 +13,11 @@ final class LateInitTests: XCTestCase {
     @LateInit var text: String
     
     override func setUp() {
-        $text.storage = nil
+        _text.storage = nil
     }
     
     func testInternalStorage() {
-        XCTAssertNil($text.storage)
+        XCTAssertNil(_text.storage)
     }
     
     func testGet() {
@@ -28,7 +28,7 @@ final class LateInitTests: XCTestCase {
         text = "New text"
         
         XCTAssertEqual(text, "New text")
-        XCTAssertEqual($text.storage, "New text")
+        XCTAssertEqual(_text.storage, "New text")
     }
     
     static var allTests = [

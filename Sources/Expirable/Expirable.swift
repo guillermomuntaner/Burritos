@@ -26,7 +26,7 @@ import Foundation
 /// @Expirable(initialValue: "zyx987", expirationDate: date, duration: 60)
 /// var apiToken: String?
 /// // or just update an existing one:
-/// $apiToken.set("zyx987", expirationDate: date)
+/// _apiToken.set("zyx987", expirationDate: date)
 /// ```
 ///
 /// [Courtesy of @v_pradeilles](https://twitter.com/v_pradeilles)

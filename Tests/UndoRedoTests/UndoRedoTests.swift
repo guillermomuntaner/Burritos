@@ -13,7 +13,7 @@ final class UndoRedoTests: XCTestCase {
     @UndoRedo var text = "Hello, World!"
     
     override func setUp() {
-        $text = UndoRedo<String>(initialValue: "Hello, World!")
+        _text = UndoRedo<String>(initialValue: "Hello, World!")
     }
     
     func testGet() {
@@ -29,22 +29,22 @@ final class UndoRedoTests: XCTestCase {
     
     func testCanUndo() {
         text = "Hello"
-        XCTAssertTrue($text.canUndo)
+        XCTAssertTrue(_text.canUndo)
         XCTAssertEqual(text, "Hello")
     }
     
     func testUndo() {
         text = "Hello"
-        XCTAssertTrue($text.undo())
+        XCTAssertTrue(_text.undo())
         XCTAssertEqual(text, "Hello, World!")
     }
     
     func testCannotUndoFirstValue() {
         text = "Hello"
-        $text.undo()
+        _text.undo()
         XCTAssertEqual(text, "Hello, World!")
-        XCTAssertFalse($text.canUndo)
-        XCTAssertFalse($text.undo())
+        XCTAssertFalse(_text.canUndo)
+        XCTAssertFalse(_text.undo())
         XCTAssertEqual(text, "Hello, World!")
     }
     
@@ -52,37 +52,37 @@ final class UndoRedoTests: XCTestCase {
     
     func testCanRedo() {
         text = "Hello"
-        $text.undo()
-        XCTAssertTrue($text.canRedo)
+        _text.undo()
+        XCTAssertTrue(_text.canRedo)
         XCTAssertEqual(text, "Hello, World!")
     }
     
     func testRedo() {
         text = "Hello"
-        $text.undo()
+        _text.undo()
         XCTAssertEqual(text, "Hello, World!")
-        XCTAssertTrue($text.redo())
+        XCTAssertTrue(_text.redo())
         XCTAssertEqual(text, "Hello")
     }
     
     func testCannotRedoLastValue() {
         text = "Hello"
         text = "Hello world"
-        XCTAssertFalse($text.canRedo)
-        XCTAssertFalse($text.redo())
+        XCTAssertFalse(_text.canRedo)
+        XCTAssertFalse(_text.redo())
     }
     
     func testCannotRedoAfterSettingValue() {
         text = "Hello"
         text = "Hello world"
-        $text.undo() // text == "Hello"
+        _text.undo() // text == "Hello"
         
-        XCTAssertTrue($text.canRedo)
+        XCTAssertTrue(_text.canRedo)
         
         text = "Hello world!"
         
-        XCTAssertFalse($text.canRedo)
-        XCTAssertFalse($text.redo())
+        XCTAssertFalse(_text.canRedo)
+        XCTAssertFalse(_text.redo())
     }
     
     // MARK: Others
@@ -92,20 +92,20 @@ final class UndoRedoTests: XCTestCase {
         text = "Hello"
         text = "Hello world"
         text = "Hello world!"
-        $text.undo() // text == "Hello world"
-        $text.undo() // text == "Hello"
-        $text.undo() // text == "Hello, World"
-        $text.redo() // text == "Hello"
+        _text.undo() // text == "Hello world"
+        _text.undo() // text == "Hello"
+        _text.undo() // text == "Hello, World"
+        _text.redo() // text == "Hello"
         
         XCTAssertEqual(text, "Hello")
-        XCTAssertTrue($text.canUndo)
-        XCTAssertTrue($text.canRedo)
+        XCTAssertTrue(_text.canUndo)
+        XCTAssertTrue(_text.canRedo)
         
-        $text.cleanHistory()
+        _text.cleanHistory()
         
         XCTAssertEqual(text, "Hello")
-        XCTAssertFalse($text.canUndo)
-        XCTAssertFalse($text.canRedo)
+        XCTAssertFalse(_text.canUndo)
+        XCTAssertFalse(_text.canRedo)
     }
     
     static var allTests = [

@@ -24,10 +24,13 @@ A collection of well tested Swift Property Wrappers.
 
 ## 🚧 Beta Software:  🚧 
 
-Property Wrappers were announced by Apple during WWDC 2019. They are a fundamental component in SwiftUI syntax sugar hence Apple pushed them into the Swift 5.1 beta, skipping the normal Swift Evolution process. Final proposals are being discussed right now in the forums so keep in ming the API can change.
+Property Wrappers have a final shape 🎉. [See the accepted proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md)
+Expecting bug fixes in incoming betas but no changes.
+
+👉 Did you know: Property Wrappers were announced by Apple during WWDC 2019. They are a fundamental component in SwiftUI syntax sugar hence Apple pushed them into the initial Swift 5.1 beta, skipping the normal Swift Evolution process. This process continued after WWDC and it took 3 reviews to reach their final form on Xcode 11 beta 4.
 
 ## Requirements
-Xcode 11.0 Beta 3 & Swift 5.1
+Xcode 11.0 Beta 4 & Swift 5.1
 
 ## Installation
 
@@ -77,7 +80,7 @@ count = 99
 
 // To mutate (read-modify-write) always use the wrapper method:
 DispatchQueue.concurrentPerform(iterations: 1000) { index in
-    $count.mutate { $0 += 1 }
+    _count.mutate { $0 += 1 }
 }
 
 print(count) // 1099
@@ -198,7 +201,7 @@ print(apiToken) // nil
 @Expirable(initialValue: "zyx987", expirationDate: date, duration: 60)
 var apiToken: String?
 // or just update an existing one:
-$apiToken.set("zyx987", expirationDate: date)
+_apiToken.set("zyx987", expirationDate: date)
 ```
 
 [Courtesy of @v_pradeilles](https://twitter.com/v_pradeilles)
@@ -247,7 +250,7 @@ print(result) // expensiveOperation() is executed at this point
 result = newResult // Compiler error
 ```
 
-**Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `$value = LazyConstant(initialValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
+**Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `_value = LazyConstant(initialValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
 
 
 ## @Trimmed
@@ -277,11 +280,11 @@ A property wrapper that automatically stores history and supports undo and redo 
 text = "Hello"
 text = "Hello, World!"
 
-$text.canUndo // true
-$text.undo() // text == "Hello"
+_text.canUndo // true
+_text.undo() // text == "Hello"
 
-$text.canRedo // true
-$text.redo() // text == "Hello, World!"
+_text.canRedo // true
+_text.redo() // text == "Hello, World!"
 ```
 
 You can check at any time if there is an undo or a redo stack using `canUndo` & `canRedo`
@@ -373,8 +376,8 @@ Swift 5.1 leverages annotations and the compiler to generate this code for you. 
 // Access the wrapped value:
 value
 
-// You can also access the wrapper by using $
-$value // <- This is the SomeWrapper<String> instance
+// You can also access the wrapper by using _
+_value // <- This is the SomeWrapper<String> instance
 ```  
 
 

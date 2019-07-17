@@ -20,7 +20,7 @@ final class UserDefaultTests: XCTestCase {
     
     func testGetDefaultValue() {
         let userDefaults = UserDefaults.makeClearedInstance()
-        $test.userDefaults = userDefaults
+        _test.userDefaults = userDefaults
         XCTAssertEqual(test, "Hello, World!")
         XCTAssertEqual(userDefaults.string(forKey: "test"), nil)
     }
@@ -28,7 +28,7 @@ final class UserDefaultTests: XCTestCase {
     func testGet() {
         let userDefaults = UserDefaults.makeClearedInstance()
         userDefaults.set("Existing value for test key :D", forKey: "test")
-        $test.userDefaults = userDefaults
+        _test.userDefaults = userDefaults
         
         XCTAssertEqual(test, "Existing value for test key :D")
         XCTAssertEqual(userDefaults.string(forKey: "test"), "Existing value for test key :D")
@@ -36,7 +36,7 @@ final class UserDefaultTests: XCTestCase {
     
     func testSet() {
         let userDefaults = UserDefaults.makeClearedInstance()
-        $test.userDefaults = userDefaults
+        _test.userDefaults = userDefaults
         test = "A new value for test key :P"
         
         XCTAssertEqual(userDefaults.string(forKey: "test"), "A new value for test key :P")
@@ -44,7 +44,7 @@ final class UserDefaultTests: XCTestCase {
     }
     
     func testInt() {
-        $count.userDefaults = UserDefaults.makeClearedInstance()
+        _count.userDefaults = UserDefaults.makeClearedInstance()
         
         XCTAssertEqual(count, 13)
         count = 7

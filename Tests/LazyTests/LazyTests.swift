@@ -13,30 +13,30 @@ final class LazyTests: XCTestCase {
     @Lazy var text = "Hello, World!"
     
     override func setUp() {
-        $text = Lazy(initialValue: "Hello, World!")
+        _text = Lazy(initialValue: "Hello, World!")
     }
     
     func testLazyInternalStorage() {
-        XCTAssertNil($text.storage)
+        XCTAssertNil(_text.storage)
     }
     
     func testGet() {
         XCTAssertEqual(text, "Hello, World!")
-        XCTAssertEqual($text.storage, "Hello, World!")
+        XCTAssertEqual(_text.storage, "Hello, World!")
     }
     
     func testSet() {
         text = "New text"
         
         XCTAssertEqual(text, "New text")
-        XCTAssertEqual($text.storage, "New text")
+        XCTAssertEqual(_text.storage, "New text")
     }
     
     func testReset() {
         _ = text // Force init
         
-        $text.reset()
-        XCTAssertNil($text.storage)
+        _text.reset()
+        XCTAssertNil(_text.storage)
     }
     
     static var allTests = [

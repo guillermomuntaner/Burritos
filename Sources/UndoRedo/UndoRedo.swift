@@ -17,11 +17,11 @@ import Foundation
 /// text = "Hello"
 /// text = "Hello, World!"
 ///
-/// $text.canUndo // true
-/// $text.undo() // text == "Hello"
+/// _text.canUndo // true
+/// _text.undo() // text == "Hello"
 ///
-/// $text.canRedo // true
-/// $text.redo() // text == "Hello, World!"
+/// _text.canRedo // true
+/// _text.redo() // text == "Hello, World!"
 /// ```
 ///
 /// You can check at any time if there is an undo or a redo stack using `canUndo` & `canRedo`

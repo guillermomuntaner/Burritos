@@ -25,7 +25,7 @@ final class ExpirableTests: XCTestCase {
     func testGetExpired() {
         token = "1234"
         Thread.sleep(forTimeInterval: 0.3)
-        XCTAssertFalse($token.isValid)
+        XCTAssertFalse(_token.isValid)
     }
     
     func testSet() {
@@ -34,7 +34,7 @@ final class ExpirableTests: XCTestCase {
     }
     
     func testIsValid() {
-        XCTAssertTrue($token.isValid)
+        XCTAssertTrue(_token.isValid)
     }
     
     func testIsValidExpired() {
@@ -45,7 +45,7 @@ final class ExpirableTests: XCTestCase {
     
     func testInitWithExistingValidToken() {
         let expirationDate = Date().addingTimeInterval(0.2)
-        $token = Expirable<String>(initialValue: "abc", expirationDate: expirationDate, duration: 0.2)
+        _token = Expirable<String>(initialValue: "abc", expirationDate: expirationDate, duration: 0.2)
         XCTAssertEqual(token, "abc")
         Thread.sleep(forTimeInterval: 0.1)
         XCTAssertEqual(token, "abc")
@@ -55,12 +55,12 @@ final class ExpirableTests: XCTestCase {
     
     func testInitWithExistingExpiredToken() {
         let pastDate = Date().addingTimeInterval(-0.1)
-        $token = Expirable<String>(initialValue: "abc", expirationDate: pastDate, duration: 0.2)
+        _token = Expirable<String>(initialValue: "abc", expirationDate: pastDate, duration: 0.2)
         XCTAssertNil(token)
     }
     
     func testSetWithCustomDate() {
-        $token.set("abc", expirationDate: Date().addingTimeInterval(0.2))
+        _token.set("abc", expirationDate: Date().addingTimeInterval(0.2))
         XCTAssertEqual(token, "abc")
         Thread.sleep(forTimeInterval: 0.1)
         XCTAssertEqual(token, "abc")

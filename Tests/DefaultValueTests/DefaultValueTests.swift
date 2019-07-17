@@ -25,8 +25,8 @@ final class DefaultValueTests: XCTestCase {
     // MARK: - Tests
     
     override func setUp() {
-        $double = DefaultValue(default: DefaultValueTests.defaultValue)
-        $optional = DefaultValue(default: "Hello, World!")
+        _double = DefaultValue(default: DefaultValueTests.defaultValue)
+        _optional = DefaultValue(default: "Hello, World!")
     }
     
     func testGetDefaultValue() {
@@ -34,7 +34,7 @@ final class DefaultValueTests: XCTestCase {
     }
 
     func testGetNonDefaultValue() {
-        $double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
+        _double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
         XCTAssertEqual(double, 5)
     }
 
@@ -44,19 +44,19 @@ final class DefaultValueTests: XCTestCase {
     }
 
     func testResetBySettingNil() {
-        $double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
+        _double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
         double = nil
         XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }
     
     func testReset() {
-        $double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
-        $double.reset()
+        _double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
+        _double.reset()
         XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }
     
     func testOptionalReset() {
-        $optional = DefaultValue(default: "Hello, World!")
+        _optional = DefaultValue(default: "Hello, World!")
         optional = "Yay"
         optional = nil
         XCTAssertEqual(optional, "Hello, World!")

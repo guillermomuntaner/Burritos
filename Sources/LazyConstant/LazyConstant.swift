@@ -20,7 +20,7 @@
 /// As an extra on top of `lazy` it offers reseting the wrapper to its "uninitialized" state.
 ///
 /// - Note: This wrapper prevents reassigning the wrapped property value but *NOT* the wrapper itself.
-/// Reassigning the wrapper `$value = LazyConstant(initialValue: "Hola!")` is possible and
+/// Reassigning the wrapper `_value = LazyConstant(initialValue: "Hola!")` is possible and
 /// since wrappers themselves need to be declared variable there is no way to prevent it.
 @propertyWrapper
 public struct LazyConstant<Value> {

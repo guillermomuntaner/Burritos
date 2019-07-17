@@ -13,23 +13,23 @@ final class LazyConstantTests: XCTestCase {
     @LazyConstant var text = "Hello, World!"
     
     override func setUp() {
-        $text = LazyConstant(initialValue: "Hello, World!")
+        _text = LazyConstant(initialValue: "Hello, World!")
     }
     
     func testLazyInternalStorage() {
-        XCTAssertNil($text.storage)
+        XCTAssertNil(_text.storage)
     }
     
     func testGet() {
         XCTAssertEqual(text, "Hello, World!")
-        XCTAssertEqual($text.storage, "Hello, World!")
+        XCTAssertEqual(_text.storage, "Hello, World!")
     }
     
     func testReset() {
         _ = text // Force init
         
-        $text.reset()
-        XCTAssertNil($text.storage)
+        _text.reset()
+        XCTAssertNil(_text.storage)
     }
     
     // MARK : LazyConstant

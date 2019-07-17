@@ -16,6 +16,7 @@ A collection of well tested Swift Property Wrappers.
   * @Trimmed
   * @UndoRedo
   * @UserDefault
+  * @Observed
   * More coming ...
                        DESC
 
@@ -102,6 +103,12 @@ A collection of well tested Swift Property Wrappers.
   ## @UserDefault
   s.subspec 'UserDefault' do |sp|
     sp.source_files = 'Sources/UserDefault/*'
+    sp.framework = 'Foundation'
+  end
+
+  ## @Observed
+  s.subspec 'Observed' do |sp|
+    sp.source_files = 'Sources/Observed/*'
     sp.framework = 'Foundation'
   end
 end

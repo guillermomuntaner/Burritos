@@ -20,6 +20,7 @@ A collection of well tested Swift Property Wrappers.
 - [@Trimmed](#Trimmed)
 - [@UndoRedo](#UndoRedo)
 - [@UserDefault](#UserDefault)
+- [@Observed](#Observed)
 - More coming ...
 
 ## 🚧 Beta Software:  🚧 
@@ -307,6 +308,33 @@ By default it uses the standard user defauls. You can pass any other instance of
 let userDefaults = UserDefaults(suiteName: "your.app.group")
 @UserDefault("test", defaultValue: "Hello, World!", userDefaults: userDefaults)
 var test: String
+```
+
+## @Observed
+
+Implementation of the Observer pattern. The annotated property becomes a `Subject` that can be observed by `Observers`.
+
+```swift
+
+class IndexObserver: Observer {
+    func update(value: Int) {
+        print ("New value received: \(value)")
+    }
+}
+
+@Observed
+var index = 1
+
+let indexObserver = IndexObserver().toAnyObserver()
+$index.add(observer: indexObserver)
+
+index = 2
+
+// will make indexObserver print: New value received: 2
+
+// later the observer can be removed like this:
+$index.remove(observer: indexObserver)
+
 ```
 
 ## @Cached

@@ -11,6 +11,7 @@ import LazyTests
 import TrimmedTests
 import UndoRedoTests
 import UserDefaultTests
+import ObservedTests
 
 var tests = [XCTestCaseEntry]()
 tests += AtomicWriteTests.allTests()
@@ -26,5 +27,6 @@ tests += LazyConstantTests.allTests()
 tests += Trimmed.allTests()
 tests += UndoRedoTests.allTests()
 tests += UserDefaultTests.allTests()
+tests += ObservedTests.allTests()
 
 XCTMain(tests)

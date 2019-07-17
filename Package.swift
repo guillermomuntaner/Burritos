@@ -23,6 +23,7 @@ let package = Package(
                 "Trimmed",
                 "UndoRedo",
                 "UserDefault",
+                "Observed",
             ]),
     ],
     dependencies: [], // No dependencies
@@ -58,5 +59,7 @@ let package = Package(
         .testTarget(name: "UndoRedoTests", dependencies: ["UndoRedo"]),
         .target(name: "UserDefault", dependencies: []),
         .testTarget(name: "UserDefaultTests", dependencies: ["UserDefault"]),
+        .target(name: "Observed", dependencies: []),
+        .testTarget(name: "ObservedTests", dependencies: ["Observed"]),
     ]
 )

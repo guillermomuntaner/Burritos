@@ -39,7 +39,7 @@ Xcode 11 & Swift 5
 If you already have a Package.swift or you are building your own package simply add a new dependency:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/guillermomuntaner/Burritos", from: "0.0.2")
+    .package(url: "https://github.com/guillermomuntaner/Burritos", from: "0.0.3")
 ]
 ```
 
@@ -48,14 +48,14 @@ dependencies: [
 
 Add Burritos to your Podfile:
 ```rb
-pod 'Burritos', '~> 0.0.2'
+pod 'Burritos', '~> 0.0.3'
 ```
 
 Each wrapper is a submodule, so you add just the one(s) you want
 ```rb
-pod 'Burritos/Copying', '~> 0.0.2'
-pod 'Burritos/UndoRedo', '~> 0.0.2'
-pod 'Burritos/UserDefault', '~> 0.0.2'
+pod 'Burritos/Copying', '~> 0.0.3'
+pod 'Burritos/UndoRedo', '~> 0.0.3'
+pod 'Burritos/UserDefault', '~> 0.0.3'
 ```
 
 

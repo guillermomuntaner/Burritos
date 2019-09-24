@@ -10,7 +10,7 @@ import XCTest
 
 final class ExpirableTests: XCTestCase {
     
-    @Expirable(duration: 0.2)
+    @Expirable(duration: 1)
     var token: String?
     
     override func setUp() {
@@ -24,7 +24,7 @@ final class ExpirableTests: XCTestCase {
     
     func testGetExpired() {
         token = "1234"
-        Thread.sleep(forTimeInterval: 0.3)
+        Thread.sleep(forTimeInterval: 2)
         XCTAssertFalse(_token.isValid)
     }
     
@@ -39,32 +39,32 @@ final class ExpirableTests: XCTestCase {
     
     func testIsValidExpired() {
         token = "1234"
-        Thread.sleep(forTimeInterval: 0.3)
+        Thread.sleep(forTimeInterval: 2)
         XCTAssertNil(token)
     }
     
     func testInitWithExistingValidToken() {
-        let expirationDate = Date().addingTimeInterval(0.2)
-        _token = Expirable<String>(wrappedValue: "abc", expirationDate: expirationDate, duration: 0.2)
+        let expirationDate = Date().addingTimeInterval(2)
+        _token = Expirable<String>(wrappedValue: "abc", expirationDate: expirationDate, duration: 2)
         XCTAssertEqual(token, "abc")
-        Thread.sleep(forTimeInterval: 0.1)
+        Thread.sleep(forTimeInterval: 1)
         XCTAssertEqual(token, "abc")
-        Thread.sleep(forTimeInterval: 0.3)
+        Thread.sleep(forTimeInterval: 3)
         XCTAssertNil(token)
     }
     
     func testInitWithExistingExpiredToken() {
-        let pastDate = Date().addingTimeInterval(-0.1)
-        _token = Expirable<String>(wrappedValue: "abc", expirationDate: pastDate, duration: 0.2)
+        let pastDate = Date().addingTimeInterval(-2)
+        _token = Expirable<String>(wrappedValue: "abc", expirationDate: pastDate, duration: 2)
         XCTAssertNil(token)
     }
     
     func testSetWithCustomDate() {
-        _token.set("abc", expirationDate: Date().addingTimeInterval(0.2))
+        _token.set("abc", expirationDate: Date().addingTimeInterval(2))
         XCTAssertEqual(token, "abc")
-        Thread.sleep(forTimeInterval: 0.1)
+        Thread.sleep(forTimeInterval: 1)
         XCTAssertEqual(token, "abc")
-        Thread.sleep(forTimeInterval: 0.3)
+        Thread.sleep(forTimeInterval: 3)
         XCTAssertNil(token)
     }
     

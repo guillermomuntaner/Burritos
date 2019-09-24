@@ -25,12 +25,12 @@ A collection of well tested Swift Property Wrappers.
   s.source           = { :git => 'https://github.com/guillermomuntaner/Burritos.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/guillermomp87'
 
-  s.ios.deployment_target = '13.0'
-  s.osx.deployment_target = '10.15'
-  s.tvos.deployment_target = '13.0'
-  s.watchos.deployment_target = '6.0'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.10'
+  s.tvos.deployment_target = '9.0'
+  s.watchos.deployment_target = '2.0'
 
-  s.swift_version = '5.1'
+  s.swift_versions = ['5.0', '5.1']
 
   ## @AtomicWrite
   s.subspec 'AtomicWrite' do |sp|

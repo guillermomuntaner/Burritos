@@ -5,6 +5,12 @@ import PackageDescription
 
 let package = Package(
     name: "Burritos",
+    platforms: [
+    .macOS(.v10_10),
+            .iOS(.v8),
+            .tvOS(.v9),
+            .watchOS(.v2)
+    ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
@@ -58,5 +64,6 @@ let package = Package(
         .testTarget(name: "UndoRedoTests", dependencies: ["UndoRedo"]),
         .target(name: "UserDefault", dependencies: []),
         .testTarget(name: "UserDefaultTests", dependencies: ["UserDefault"]),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )

@@ -22,21 +22,14 @@ A collection of well tested Swift Property Wrappers.
 - [@UserDefault](#UserDefault)
 - More coming ...
 
-## 🚧 Beta Software:  🚧 
-
-Property Wrappers have a final shape 🎉. [See the accepted proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md)
-Expecting bug fixes in incoming betas but no changes.
-
-👉 Did you know: Property Wrappers were announced by Apple during WWDC 2019. They are a fundamental component in SwiftUI syntax sugar hence Apple pushed them into the initial Swift 5.1 beta, skipping the normal Swift Evolution process. This process continued after WWDC and it took 3 reviews to reach their final form on Xcode 11 beta 4.
-
 ## Requirements
-Xcode 11.0 Beta 4 & Swift 5.1
+Xcode 11 & Swift 5
 
 ## Installation
 
 ### Swift Package Manager
 
-#### Xcode 11.0+ integration
+#### Xcode 11+ integration
 1.  Open `MenuBar` → `File` → `Swift Packages` → `Add Package Dependency...`
 2.  Paste the package repository url `https://github.com/guillermomuntaner/Burritos` and hit Next.
 3.  Select your rules. Since this package is in pre-release development, I suggest you specify a concrete tag to avoid pulling breaking changes.
@@ -198,7 +191,7 @@ sleep(61)
 print(apiToken) // nil
 
 // You can also construct an expirable with an initial value and expiration date:
-@Expirable(initialValue: "zyx987", expirationDate: date, duration: 60)
+@Expirable(wrappedValue: "zyx987", expirationDate: date, duration: 60)
 var apiToken: String?
 // or just update an existing one:
 _apiToken.set("zyx987", expirationDate: date)
@@ -250,7 +243,7 @@ print(result) // expensiveOperation() is executed at this point
 result = newResult // Compiler error
 ```
 
-**Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `_value = LazyConstant(initialValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
+**Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `_value = LazyConstant(wrappedValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
 
 
 ## @Trimmed
@@ -330,59 +323,15 @@ TODO: A property wrapper that prints/logs any value set.
 
 ## About Property Wrappers
 
-A property wrapper, or property delegate, is a pattern to abstract custom read and writte behaviours.
-In Swift we can use a generic struct exposing a computed property whose get & set methods we can implement however we want. This allows us to reuse some get/set logic with any type:
+Quoting the [Property Wrappers Proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md) description:
+> A property wrapper is a mechanism to abstract property implementation patterns that come up repeatedly.
 
-```swift
-struct SomeWrapper<T> {
-    ...
-    var value: T {
-        get {
-            // Your custom get logic
-            ...
-        }
-        set {
-            // Your custom set logic
-            ...
-        }
-    }
-}
-```
-
-In plain old Swift you would have used this as follows:
-
-```swift
-// Instantiate your property wrapper
-var wrappedProperty = SomeWrapper<String>("Hello, World!")
-
-// Access its value
-wrappedProperty.value
-
-// In order to avoid having to unwrap wrappedProperty.value all the time, you can use a computed property
-var value: String {
-    get { return wrappedProperty.value }
-    set { wrappedProperty.value = newValue }
-}
-
-// So now accessing the value is much easier
-value
-```
-
-Swift 5.1 leverages annotations and the compiler to generate this code for you. It also bridges the assignment operator to the wrapper constructor which leads to a really nice syntax. So now, we can simply use:
-
-```swift
-@SomeWrapper var value = "Hello, World!"
-
-// Access the wrapped value:
-value
-
-// You can also access the wrapper by using _
-_value // <- This is the SomeWrapper<String> instance
-```  
-
+👉 Did you know: Property Wrappers were announced by Apple during WWDC 2019. 
+They are a fundamental component in SwiftUI syntax sugar hence Apple pushed them into the initial Swift 5.1 beta, skipping the normal Swift Evolution process. 
+This process continued after WWDC and it took 3 reviews to reach their final form on Xcode 11 beta 4.
 
 Interesting reads:
-* [Original Property Wrappers Proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md)
+* [Swift Evolution Property Wrappers Proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md)
 * [SwiftLee: Property wrappers to remove boilerplate code in Swift](https://www.avanderlee.com/swift/property-wrappers/)
 * [Majid's: Understanding Property Wrappers in SwiftUI](https://mecid.github.io/2019/06/12/understanding-property-wrappers-in-swiftui/)
 * [Swift by Sundell: The Swift 5.1 features that power SwiftUI’s API](https://www.swiftbysundell.com/posts/the-swift-51-features-that-power-swiftuis-api)

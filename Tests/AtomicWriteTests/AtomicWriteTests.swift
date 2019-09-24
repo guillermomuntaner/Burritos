@@ -15,19 +15,19 @@ final class AtomicWriteTests: XCTestCase {
     @AtomicWrite var count: Int = 0
     
     override func setUp() {
-        _count = AtomicWrite(initialValue: 0)
+        _count = AtomicWrite(wrappedValue: 0)
     }
     
     func testGet() {
         XCTAssertEqual(count, 0)
-        XCTAssertEqual(_count.storage, 0)
+        XCTAssertEqual(_count.value, 0)
     }
     
     func testSet() {
         count = 99
         
         XCTAssertEqual(count, 99)
-        XCTAssertEqual(_count.storage, 99)
+        XCTAssertEqual(_count.value, 99)
     }
     
     /// Tests the issue with this property wrapper which is lack of native read & write exclusivity

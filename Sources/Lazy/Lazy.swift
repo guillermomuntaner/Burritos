@@ -30,7 +30,7 @@ public struct Lazy<Value> {
     ///
     ///     @Lazy var text = "Hello, World!"
     ///
-    public init(initialValue constructor: @autoclosure @escaping () -> Value) {
+    public init(wrappedValue constructor: @autoclosure @escaping () -> Value) {
         self.constructor = constructor
     }
     

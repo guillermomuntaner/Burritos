@@ -13,7 +13,7 @@ final class LazyConstantTests: XCTestCase {
     @LazyConstant var text = "Hello, World!"
     
     override func setUp() {
-        _text = LazyConstant(initialValue: "Hello, World!")
+        _text = LazyConstant(wrappedValue: "Hello, World!")
     }
     
     func testLazyInternalStorage() {

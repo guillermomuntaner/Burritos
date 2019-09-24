@@ -23,21 +23,21 @@ import Foundation
 /// ```
 @propertyWrapper
 public struct Trimmed {
-    private var storage: String!
+    private var value: String!
     private let characterSet: CharacterSet
     
     public var wrappedValue: String {
-        get { storage }
-        set { storage = newValue.trimmingCharacters(in: characterSet) }
+        get { value }
+        set { value = newValue.trimmingCharacters(in: characterSet) }
     }
     
-    public init(initialValue: String) {
+    public init(wrappedValue: String) {
         self.characterSet = .whitespacesAndNewlines
-        wrappedValue = initialValue
+        self.wrappedValue = wrappedValue
     }
     
-    public init(initialValue: String, characterSet: CharacterSet) {
+    public init(wrappedValue: String, characterSet: CharacterSet) {
         self.characterSet = characterSet
-        wrappedValue = initialValue
+        self.wrappedValue = wrappedValue
     }
 }

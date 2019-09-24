@@ -23,7 +23,7 @@ import Foundation
 /// print(apiToken) // nil
 ///
 /// // You can also construct an expirable with an initial value and expiration date:
-/// @Expirable(initialValue: "zyx987", expirationDate: date, duration: 60)
+/// @Expirable(wrappedValue: "zyx987", expirationDate: date, duration: 60)
 /// var apiToken: String?
 /// // or just update an existing one:
 /// _apiToken.set("zyx987", expirationDate: date)
@@ -51,9 +51,9 @@ public struct Expirable<Value> {
     /// wrapper will simply treat the initial value as expired inmediatly.
     ///
     /// The duration will be ignored for this initial value but will be used as soon as a new value is set.
-    public init(initialValue: Value, expirationDate: Date, duration: TimeInterval) {
+    public init(wrappedValue: Value, expirationDate: Date, duration: TimeInterval) {
         self.duration = duration
-        storage = (initialValue, expirationDate)
+        storage = (wrappedValue, expirationDate)
     }
     
     public var wrappedValue: Value? {

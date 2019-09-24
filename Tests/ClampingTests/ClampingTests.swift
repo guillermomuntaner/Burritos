@@ -26,20 +26,20 @@ final class ClampingTests: XCTestCase {
     // MARK: Init
     
     func testInitInRange() {
-        _alpha = Clamping(initialValue: 0.5, range: 0...1)
+        _alpha = Clamping(wrappedValue: 0.5, range: 0...1)
         XCTAssertEqual(alpha, 0.5)
     }
 
     func testInitLessOrEqualThanLowerBound() {
         [-Double.greatestFiniteMagnitude, -1.0, 0.0].forEach { value in
-            _alpha = Clamping(initialValue: value, range: 0...1)
+            _alpha = Clamping(wrappedValue: value, range: 0...1)
             XCTAssertEqual(alpha, 0)
         }
     }
 
     func testInitBiggerOrEqualThanUpperBound() {
         [1.0, 1.5, Double.greatestFiniteMagnitude, Double.infinity].forEach { value in
-            _alpha = Clamping(initialValue: value, range: 0...1)
+            _alpha = Clamping(wrappedValue: value, range: 0...1)
             XCTAssertEqual(alpha, 1)
         }
     }

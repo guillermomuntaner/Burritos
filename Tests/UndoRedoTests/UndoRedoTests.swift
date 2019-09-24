@@ -13,7 +13,7 @@ final class UndoRedoTests: XCTestCase {
     @UndoRedo var text = "Hello, World!"
     
     override func setUp() {
-        _text = UndoRedo<String>(initialValue: "Hello, World!")
+        _text = UndoRedo<String>(wrappedValue: "Hello, World!")
     }
     
     func testGet() {

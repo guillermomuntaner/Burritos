@@ -24,17 +24,17 @@
 /// [NSHisper article](https://nshipster.com/propertywrapper/)
 @propertyWrapper
 public struct Clamping<Value: Comparable> {
-    var storage: Value
+    var value: Value
     let range: ClosedRange<Value>
     
-    public init(initialValue: Value, range: ClosedRange<Value>) {
+    public init(wrappedValue: Value, range: ClosedRange<Value>) {
         self.range = range
-        self.storage = range.clamp(initialValue)
+        self.value = range.clamp(wrappedValue)
     }
     
     public var wrappedValue: Value {
-        get { storage }
-        set { storage = range.clamp(newValue) }
+        get { value }
+        set { value = range.clamp(newValue) }
     }
 }
 

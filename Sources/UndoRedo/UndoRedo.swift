@@ -40,8 +40,8 @@ public struct UndoRedo<Value> {
     var index: Int
     var values: [Value]
     
-    public init(initialValue: Value) {
-        self.values = [initialValue]
+    public init(wrappedValue: Value) {
+        self.values = [wrappedValue]
         self.index = 0
     }
     

@@ -19,7 +19,7 @@ final class CopyingTests: XCTestCase {
     @Copying var instance: SomeClass = .init() // Dummy value
     
     override func setUp() {
-        _instance = Copying(initialValue: initialInstance)
+        _instance = Copying(wrappedValue: initialInstance)
     }
     
     func testCopyOnDefaultInit() {

@@ -34,7 +34,7 @@ final class DefaultValueTests: XCTestCase {
     }
 
     func testGetNonDefaultValue() {
-        _double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
+        _double = DefaultValue(wrappedValue: 5, default: DefaultValueTests.defaultValue)
         XCTAssertEqual(double, 5)
     }
 
@@ -44,13 +44,13 @@ final class DefaultValueTests: XCTestCase {
     }
 
     func testResetBySettingNil() {
-        _double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
+        _double = DefaultValue(wrappedValue: 5, default: DefaultValueTests.defaultValue)
         double = nil
         XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }
     
     func testReset() {
-        _double = DefaultValue(initialValue: 5, default: DefaultValueTests.defaultValue)
+        _double = DefaultValue(wrappedValue: 5, default: DefaultValueTests.defaultValue)
         _double.reset()
         XCTAssertEqual(double, DefaultValueTests.defaultValue)
     }

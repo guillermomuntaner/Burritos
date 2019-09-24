@@ -17,8 +17,8 @@ import Foundation
 public struct Copying<Value: NSCopying> {
     var storage: Value
     
-    public init(initialValue value: Value) {
-        storage = value.copy() as! Value
+    public init(wrappedValue: Value) {
+        storage = wrappedValue.copy() as! Value
     }
     
     public init(withoutCopying value: Value) {

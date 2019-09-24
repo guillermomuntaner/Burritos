@@ -34,7 +34,7 @@
 public struct DefaultValue<Value> {
     // MARK: - Members
 
-    private var storage: Value?
+    private var value: Value?
 
     private let defaultValue: Value
 
@@ -42,28 +42,28 @@ public struct DefaultValue<Value> {
 
     public var wrappedValue: Value! {
         get {
-            if let unboxed = storage {
+            if let unboxed = value {
                 return unboxed
             }
 
             return defaultValue
         }
         set {
-            storage = newValue
+            value = newValue
         }
     }
 
     // MARK: - Init
     
-    public init(initialValue: Value? = nil, default: Value) {
+    public init(wrappedValue: Value? = nil, default: Value) {
         defaultValue = `default`
-        storage = initialValue
+        value = wrappedValue
     }
     
     // MARK: - Public API
     
     /// Resets the wrapper to its default value.  This is equivalent to setting nil.
     public mutating func reset() {
-        storage = nil
+        value = nil
     }
 }

@@ -23,7 +23,7 @@ import Foundation
 /// [Environment variables in Mac OSX](https://stackoverflow.com/a/4567308)
 @propertyWrapper
 public struct EnvironmentVariable {
-    var name: String
+    public var name: String
     
     public var wrappedValue: String? {
         get {
@@ -37,5 +37,9 @@ public struct EnvironmentVariable {
             }
             setenv(name, value, 1)
         }
+    }
+
+    public init(name: String) {
+        self.name = name
     }
 }

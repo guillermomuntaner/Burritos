@@ -75,5 +75,5 @@ extension Float80: PropertyListValue {}
 #endif
 
 extension Array: PropertyListValue where Element: PropertyListValue {}
-
+extension Set: PropertyListValue where Element: PropertyListValue {}
 extension Dictionary: PropertyListValue where Key == String, Value: PropertyListValue {}

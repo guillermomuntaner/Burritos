@@ -17,6 +17,7 @@ A collection of well tested Swift Property Wrappers.
 - [@LateInit](#LateInit)
 - [@Lazy](#Lazy)
 - [@LazyConstant](#LazyConstant)
+- [@MappingSetter](#MappingSetter)
 - [@Trimmed](#Trimmed)
 - [@UndoRedo](#UndoRedo)
 - [@UserDefault](#UserDefault)
@@ -244,6 +245,17 @@ result = newResult // Compiler error
 ```
 
 **Note**: This wrapper prevents reassigning the wrapped property value but **NOT** the wrapper itself. Reassigning the wrapper `_value = LazyConstant(wrappedValue: "Hola!")` is possible and since wrappers themselves need to be declared variable there is no way to prevent it.
+
+
+## @MappingSetter
+
+A property wrapper that maps the value passed to setter.
+```swift
+@MappingSetter(mappingSetter: { String($0.prefix(5)) })
+var upToFive: String = "Hello, World!"
+...
+print(upToFive) // "Hello"
+```
 
 
 ## @Trimmed
